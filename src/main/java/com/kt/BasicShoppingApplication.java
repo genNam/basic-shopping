@@ -1,4 +1,4 @@
-package com.kt.basic_shopping;
+package com.kt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

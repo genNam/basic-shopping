@@ -26,4 +26,25 @@ public class ProductService {
 
 		product.update(name, price, quantity); //엔티티에 이름,가격, 수량 전달
 	}
+
+	public void delete(Long id) {
+
+		var product = productRepository.findByIdOrThrow(id);
+
+		product.delete();
+	}
+
+	public void inActivate(Long id) {
+		var product = productRepository.findByIdOrThrow(id);
+
+		product.inActivate();
+	}
+
+	public void activate(Long id) {
+		var product = productRepository.findByIdOrThrow(id);
+
+		product.activate();
+	}
+
+
 }

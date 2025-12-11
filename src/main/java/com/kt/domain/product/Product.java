@@ -52,4 +52,16 @@ public class Product extends BaseEntity {
 		this.price = price;
 		this.stock = stock;
 	}
+	public void delete() {
+		this.status = ProductStatus.DELETED;
+	}
+
+	public void inActivate() {
+
+		this.status = ProductStatus.IN_ACTIVATED;
+	}
+
+	public void activate() {
+		this.status = ProductStatus.ACTIVATED;
+	}
 }

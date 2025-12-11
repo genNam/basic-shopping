@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 public enum ErrorCode {
 
+	NOT_FOUND_PRODUCT(HttpStatus.BAD_REQUEST, "상품을 찾을 수 없습니다."),
 	INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "필수값 누락입니다.");
 
 	private final HttpStatus status;

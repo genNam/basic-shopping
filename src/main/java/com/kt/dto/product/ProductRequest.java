@@ -18,4 +18,16 @@ public class ProductRequest {
 		@NotNull
 		private Long quantity;
 	}
+
+	@Getter
+	@AllArgsConstructor
+	@Schema(name = "ProductRequest.Update") //이름, 가격, 수량을 json으로 받고
+	public static class Update {
+		@NotBlank
+		private String name;
+		@NotNull
+		private Long price;
+		@NotNull
+		private Long quantity;
+	}
 }

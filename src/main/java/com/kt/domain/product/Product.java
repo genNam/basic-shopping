@@ -64,4 +64,31 @@ public class Product extends BaseEntity {
 	public void activate() {
 		this.status = ProductStatus.ACTIVATED;
 	}
+
+	/*
+	public void soldOut(){
+		this.status = ProductStatus.SOLD_OUT;
+	}
+
+	//품절 : 상품(활성화) -> 토글 -> 비활성화 -> 토글 -> 활성화
+	//상품품절(토글)
+	public void toggleSoldOut(){
+
+		canToggleSoldOut();
+
+		if (status == ProductStatus.SOLD_OUT){
+			activate();
+		}else if(status == ProductStatus.ACTIVATED){
+			soldOut();
+		}
+	}
+
+	private void canToggleSoldOut(){
+
+		if(status != ProductStatus.SOLD_OUT && status != ProductStatus.ACTIVATED){
+			throw new CustomException(ErrorCode.PRODUCT_TOGGLE_NOT_ALLOWED);
+		}
+
+	}*/
+
 }

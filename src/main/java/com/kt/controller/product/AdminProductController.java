@@ -1,7 +1,10 @@
 package com.kt.controller.product;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.common.response.ApiResult;
 import com.kt.common.support.SwaggerAssistance;
+import com.kt.domain.product.Product;
 import com.kt.dto.product.ProductRequest;
+import com.kt.dto.product.ProductResponse;
 import com.kt.service.ProductService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -77,4 +82,25 @@ public class AdminProductController extends SwaggerAssistance {
 
 		return ApiResult.ok();
 	}
+
+	/*
+	@PatchMapping("/{id}/toggle-sold-out")
+	public ApiResult<Void> toggleSoldOut(@PathVariable Long id){
+		productService.soldOut(id);
+
+		return ApiResult.ok();
+	}*/
+
+	@GetMapping //클라이언트 요청을 처리
+	//관리자 리스트 조회
+	public ApiResult<List<ProductResponse.AdminSearch>> adminSearch(){
+
+		List<Product> products = productService.adminSearch();
+		List<ProductResponse.AdminSearch> response = products.stream()
+			.map(product -> ProductResponse.AdminSearch.from(product))
+			.toList();
+		return ApiResult.ok(response);
+
+	}
+
 }

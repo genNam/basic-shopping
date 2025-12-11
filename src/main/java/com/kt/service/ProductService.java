@@ -1,5 +1,7 @@
 package com.kt.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.kt.domain.product.Product;
@@ -44,6 +46,20 @@ public class ProductService {
 		var product = productRepository.findByIdOrThrow(id);
 
 		product.activate();
+	}
+
+	/*
+	public void soldOut(Long id){
+
+		var product = productRepository.findByIdOrThrow(id);
+
+		product.soldOut();
+	}*/
+
+	public List<Product> adminSearch(){
+
+		return productRepository.findAll();
+
 	}
 
 

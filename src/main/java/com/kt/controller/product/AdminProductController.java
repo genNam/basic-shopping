@@ -1,7 +1,9 @@
 package com.kt.controller.product;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -36,5 +38,20 @@ public class AdminProductController extends SwaggerAssistance {
 		);
 
 		return ApiResult.ok(); //성공됐음을 반환
+	}
+
+	@PutMapping("/{id}")
+	public ApiResult<Void> update(
+		@PathVariable Long id, //url에서 id 값을 가져온 다음
+		@RequestBody @Valid ProductRequest.Update request
+	) {
+		productService.update( //서비스에 전달(id랑 함께)
+			id,
+			request.getName(),
+			request.getPrice(),
+			request.getQuantity()
+		);
+
+		return ApiResult.ok();
 	}
 }

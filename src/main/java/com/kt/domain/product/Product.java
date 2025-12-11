@@ -46,4 +46,10 @@ public class Product extends BaseEntity {
 	public void mapToOrderProduct(OrderProduct orderProduct) {
 		this.orderproducts.add(orderProduct); //주문한 상품들에 대한 객체를 가져와서 리스트에 저장
 	}
+
+	public void update(String name, Long price, Long stock) {
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+	}
 }

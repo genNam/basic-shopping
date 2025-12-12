@@ -96,9 +96,22 @@ public class AdminProductController extends SwaggerAssistance {
 	public ApiResult<List<ProductResponse.AdminSearch>> adminSearch(){
 
 		List<Product> products = productService.adminSearch();
-		List<ProductResponse.AdminSearch> response = products.stream()
+		List<ProductResponse.AdminSearch> response = products.stream() //리스트 안의 요소들을 하나씩 꺼내옴
 			.map(product -> ProductResponse.AdminSearch.from(product))
 			.toList();
+		return ApiResult.ok(response);
+
+	}
+
+	//관리자 상세조회
+	@GetMapping("/{id}")
+	public ApiResult<ProductResponse.AdminDetail> adminDetail(
+		@PathVariable Long id
+	){
+
+		Product product = productService.adminDetail(id);
+		ProductResponse.AdminDetail response = ProductResponse.AdminDetail.from(product);
+
 		return ApiResult.ok(response);
 
 	}

@@ -56,10 +56,17 @@ public class ProductService {
 		product.soldOut();
 	}*/
 
+	//관리자 리스트 조회
 	public List<Product> adminSearch(){
 
 		return productRepository.findAll();
 
+	}
+
+	//관리자 상세 조회
+	public Product adminDetail(Long id){
+
+		return productRepository.findByIdOrThrow(id);
 	}
 
 

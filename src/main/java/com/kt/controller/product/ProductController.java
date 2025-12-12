@@ -1,9 +1,16 @@
 package com.kt.controller.product;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kt.common.response.ApiResult;
 import com.kt.common.support.SwaggerAssistance;
+import com.kt.domain.product.Product;
+import com.kt.dto.product.ProductResponse;
 import com.kt.service.ProductService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,4 +24,24 @@ import lombok.RequiredArgsConstructor;
 public class ProductController extends SwaggerAssistance {
 
 	private final ProductService productService;
+
+	//사용자 상품 리스트 조회
+	@GetMapping
+	public ApiResult<List<ProductResponse.UserList>> userList(){
+
+		var product = productService.getUserList();
+
+		return ApiResult.ok(product);
+	}
+
+	//사용자 상품 상세 조회
+	@GetMapping("/{id}")
+	public ApiResult<ProductResponse.UserDetail> userDetail(@PathVariable Long id){
+
+		var product = productService.getUserDetail(id);
+
+		return ApiResult.ok(product);
+
+
+	}
 }

@@ -8,14 +8,14 @@ import com.kt.domain.product.ProductStatus;
 public class ProductResponse {
 
 	//관리자 리스트 조회
-	public record AdminSearch(
+	public record AdminList(
 		String name,
 		Long price,
 		Long quantity
 	){
-		public static AdminSearch from(Product product){
+		public static AdminList from(Product product){
 
-			return new AdminSearch(
+			return new AdminList(
 				product.getName(),
 				product.getPrice(),
 				product.getStock()
@@ -45,6 +45,40 @@ public class ProductResponse {
 				product.getStock(),
 				product.getCreatedAt(),
 				product.getStatus()
+			);
+		}
+	}
+
+	//사용자 리스트 조회
+	public record UserList(
+
+		String name,
+		Long price
+	){
+		public static UserList from(Product product){
+
+			return new UserList(
+				product.getName(),
+				product.getPrice()
+			);
+		}
+	}
+
+	//사용자 상세 조회
+	public record UserDetail(
+
+		String name,
+		Long price,
+		boolean status
+
+	){
+		public static UserDetail of(Product product, boolean status){
+
+			return new UserDetail(
+
+				product.getName(),
+				product.getPrice(),
+				status
 			);
 		}
 	}

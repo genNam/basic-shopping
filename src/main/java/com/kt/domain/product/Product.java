@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.util.Strings;
 
+import com.kt.common.exception.CustomException;
 import com.kt.common.exception.ErrorCode;
 import com.kt.common.support.BaseEntity;
 import com.kt.common.support.Preconditions;
@@ -64,6 +65,12 @@ public class Product extends BaseEntity {
 	public void activate() {
 		this.status = ProductStatus.ACTIVATED;
 	}
+
+	public boolean canProvide(){
+
+		return status == ProductStatus.ACTIVATED && stock > 0;
+	}
+
 
 	/*
 	public void soldOut(){

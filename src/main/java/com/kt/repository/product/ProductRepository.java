@@ -1,5 +1,7 @@
 package com.kt.repository.product;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.kt.common.exception.CustomException;
@@ -12,6 +14,4 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 	default Product findByIdOrThrow(Long id){
 		return findById(id).orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
 	}
-
-
 }

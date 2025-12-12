@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kt.common.exception.CustomException;
+import com.kt.common.exception.ErrorCode;
 import com.kt.domain.product.Product;
+import com.kt.dto.product.ProductResponse;
 import com.kt.repository.product.ProductRepository;
 
 import jakarta.transaction.Transactional;
@@ -57,16 +60,46 @@ public class ProductService {
 	}*/
 
 	//관리자 리스트 조회
-	public List<Product> adminSearch(){
+	public List<ProductResponse.AdminList> adminList(){
 
-		return productRepository.findAll();
+		List<Product> products = productRepository.findAll();
+		List<ProductResponse.AdminList> response = products.stream()
+			.map(product -> ProductResponse.AdminList.from(product))
+			.toList();
+
+		return response;
 
 	}
 
 	//관리자 상세 조회
-	public Product adminDetail(Long id){
+	public ProductResponse.AdminDetail adminDetail(Long id){
 
-		return productRepository.findByIdOrThrow(id);
+		Product product = productRepository.findByIdOrThrow(id);
+		ProductResponse.AdminDetail response = ProductResponse.AdminDetail.from(product);
+
+		return response;
+	}
+
+	//사용자 리스트 조회
+	public List<ProductResponse.UserList> getUserList(){
+
+		var products = productRepository.findAll();
+		List<ProductResponse.UserList> response = products.stream()
+			.map(product -> ProductResponse.UserList.from(product))
+			.toList();
+
+		return response;
+	}
+
+	//사용자 상세 조회
+	public ProductResponse.UserDetail getUserDetail(Long id){
+
+		var product = productRepository.findByIdOrThrow(id);
+
+		var status = product.canProvide();
+		ProductResponse.UserDetail response = ProductResponse.UserDetail.of(product,status);
+
+		return response;
 	}
 
 

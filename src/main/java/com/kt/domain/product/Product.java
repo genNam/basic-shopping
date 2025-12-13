@@ -44,6 +44,8 @@ public class Product extends BaseEntity {
 
 	}
 
+	//외부 노출 방지용 코드 만들기
+
 	public void mapToOrderProduct(OrderProduct orderProduct) {
 		this.orderproducts.add(orderProduct); //주문한 상품들에 대한 객체를 가져와서 리스트에 저장
 	}

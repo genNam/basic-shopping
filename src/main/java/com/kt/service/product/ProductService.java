@@ -1,11 +1,9 @@
-package com.kt.service;
+package com.kt.service.product;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.kt.common.exception.CustomException;
-import com.kt.common.exception.ErrorCode;
 import com.kt.domain.product.Product;
 import com.kt.dto.product.ProductResponse;
 import com.kt.repository.product.ProductRepository;

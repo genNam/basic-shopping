@@ -38,4 +38,16 @@ public class UserRequest {
 	){
 
 	}
+
+	public record Update(
+
+		@NotBlank
+		String name,
+		@NotBlank
+		String email,
+		@NotBlank
+		String mobile
+	){
+
+	}
 }

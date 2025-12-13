@@ -68,6 +68,15 @@ public class User extends BaseEntity {
 		);
 	}
 
+	public void update(String name, String email, String mobile){
+		//영속성 컨텍스트에서 관리하는 엔티티를 수정
+		//JPA는 현재 엔티티랑 처음 저장된 값(스냅샷)을 비교해 변경된걸 감지하고 UPDATE 쿼리를 생성
+
+		this.name = name;
+		this.email = email;
+		this.mobile = mobile;
+	}
+
 
 
 

@@ -1,11 +1,9 @@
 package com.kt.service.user;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
-import com.kt.domain.user.Gender;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
 import com.kt.repository.user.UserRepository;
@@ -34,6 +32,17 @@ public class UserService {
 				LocalDateTime.now(),
 				LocalDateTime.now()
 			)
+		);
+	}
+
+	public void update(UserRequest.Update request, Long id){
+
+		var user = userRepository.findByIdOrThrow(id);
+
+		user.update(
+			request.name(), //record를 사용했기 때문에 getName()과 같은 형식으로 작성하지 않아도 됨
+			request.email(),
+			request.mobile()
 		);
 	}
 

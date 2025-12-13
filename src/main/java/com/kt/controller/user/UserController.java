@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Tag(name = "User")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/my")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -22,6 +22,16 @@ public class UserController {
 	public ApiResult<Void> create(@RequestBody @Valid UserRequest.Create request){
 
 		userService.create(request);
+
+		return ApiResult.ok();
+	}
+
+	@PatchMapping("/my-info/{id}") //todo : 인증 기능 구현 추가
+	public ApiResult<Void> update(
+		@PathVariable Long id,
+		@RequestBody @Valid UserRequest.Update request){
+
+		userService.update(request,id);
 
 		return ApiResult.ok();
 	}

@@ -38,9 +38,7 @@ public class AdminProductController extends SwaggerAssistance {
 	public ApiResult<Void> create(@RequestBody @Valid ProductRequest.Create request) {
 		//반환타입이 ApiResult<Void>. ApiResult 객체를 반환할거다
 		productService.create( //request dto에서 이름, 가격, 수량을 가져와서 생성
-			request.getName(),
-			request.getPrice(),
-			request.getQuantity()
+			request
 		);
 
 		return ApiResult.ok(); //성공됐음을 반환
@@ -53,9 +51,7 @@ public class AdminProductController extends SwaggerAssistance {
 	) {
 		productService.update( //서비스에 전달(id랑 함께)
 			id,
-			request.getName(),
-			request.getPrice(),
-			request.getQuantity()
+			request
 		);
 
 		return ApiResult.ok();

@@ -66,5 +66,11 @@ public class UserService {
 
 	}
 
+	//삭제
+	public void delete(Long id){
+
+		userRepository.deleteById(id);
+	}
+
 
 }

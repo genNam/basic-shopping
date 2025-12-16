@@ -9,6 +9,7 @@ import com.kt.common.exception.ErrorCode;
 import com.kt.common.support.Preconditions;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
+import com.kt.dto.user.UserResponse;
 import com.kt.repository.user.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -70,6 +71,15 @@ public class UserService {
 	public void delete(Long id){
 
 		userRepository.deleteById(id);
+	}
+
+	//내 정보 조회
+	public UserResponse.Detail detail(Long id){
+
+		var user = userRepository.findByIdOrThrow(id);
+		var response = UserResponse.Detail.from(user);
+
+		return response;
 	}
 
 

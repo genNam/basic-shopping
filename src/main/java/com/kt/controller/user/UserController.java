@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
 import com.kt.dto.user.UserRequest;
+import com.kt.dto.user.UserResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.UserService;
 
@@ -59,6 +60,16 @@ public class UserController {
 		userService.delete(currentUser.getId());
 
 		return ApiResult.ok();
+	}
+
+	//내 정보 조회
+	@GetMapping
+	public ApiResult<UserResponse.Detail> detail(
+		@AuthenticationPrincipal CurrentUser currentUser
+	){
+		var response = userService.detail(currentUser.getId());
+
+		return ApiResult.ok(response);
 	}
 
 }

@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
 import com.kt.dto.user.UserRequest;
-import com.kt.service.user.UserService;
+import com.kt.service.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

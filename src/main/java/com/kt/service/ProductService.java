@@ -1,4 +1,4 @@
-package com.kt.service.product;
+package com.kt.service;
 
 import java.util.List;
 

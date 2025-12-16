@@ -1,9 +1,11 @@
 package com.kt.controller.user;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
 import com.kt.dto.user.UserRequest;
+import com.kt.security.CurrentUser;
 import com.kt.service.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,13 +28,27 @@ public class UserController {
 		return ApiResult.ok();
 	}
 
-	@PatchMapping("/my-info/{id}") //todo : 인증 기능 구현 추가
+	//내 정보 수정
+	@PutMapping("/my-info")
 	public ApiResult<Void> update(
-		@PathVariable Long id,
+		@AuthenticationPrincipal CurrentUser currentUser,
 		@RequestBody @Valid UserRequest.Update request){
 
-		userService.update(request,id);
+		userService.update(request,currentUser.getId());
 
 		return ApiResult.ok();
 	}
+
+	//비밀번호 변경
+	@PutMapping("/change-password")
+	public ApiResult<Void> changePassword(
+		@AuthenticationPrincipal CurrentUser currentUser,
+		@RequestBody @Valid UserRequest.ChangePassword request){
+
+		userService.changePassword(request, currentUser.getId());
+
+		return ApiResult.ok();
+
+	}
+
 }

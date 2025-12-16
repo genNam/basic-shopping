@@ -77,10 +77,9 @@ public class User extends BaseEntity {
 		this.mobile = mobile;
 	}
 
-
-
-
-
+	public void changePassword(String password){
+		this.password = password;
+	}
 
 
 }

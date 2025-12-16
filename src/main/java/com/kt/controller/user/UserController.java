@@ -42,13 +42,23 @@ public class UserController {
 	//비밀번호 변경
 	@PutMapping("/change-password")
 	public ApiResult<Void> changePassword(
-		@AuthenticationPrincipal CurrentUser currentUser,
-		@RequestBody @Valid UserRequest.ChangePassword request){
+		@RequestBody @Valid UserRequest.ChangePassword request,
+		@AuthenticationPrincipal CurrentUser currentUser){
 
 		userService.changePassword(request, currentUser.getId());
 
 		return ApiResult.ok();
 
+	}
+
+	//회원 삭제(탈퇴)
+	@DeleteMapping("/withdrawal")
+	public ApiResult<Void> delete(
+		@AuthenticationPrincipal CurrentUser currentUser
+	){
+		userService.delete(currentUser.getId());
+
+		return ApiResult.ok();
 	}
 
 }

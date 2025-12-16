@@ -10,6 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+//구현체
+//인증이 끝난 후의 사용자
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +22,7 @@ public class DefaultCurrentUser implements UserDetails, CurrentUser {
 	private String loginId; //파싱한 아이디
 
 	@Override
+	//서비스, 컨트롤러 등에서 사용자를 식별하기 위해 구현
 	public Long getId() {
 		return id;
 	}
@@ -30,6 +34,7 @@ public class DefaultCurrentUser implements UserDetails, CurrentUser {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		//사용자 권한 목록을 반환
 		return List.of();
 	}
 
@@ -39,6 +44,7 @@ public class DefaultCurrentUser implements UserDetails, CurrentUser {
 	}
 
 	@Override
+	//스프링 시큐리티 내부에서 사용자를 식별하기 위해 구현
 	public String getUsername() {
 		return id.toString();
 	}

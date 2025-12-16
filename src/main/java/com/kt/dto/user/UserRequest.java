@@ -50,4 +50,17 @@ public class UserRequest {
 	){
 
 	}
+
+	public record ChangePassword(
+
+		@NotBlank
+		@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^])[A-Za-z\\d!@#$%^]{8,}$")
+		String oldPassword,
+
+		@NotBlank
+		@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^])[A-Za-z\\d!@#$%^]{8,}$")
+		String newPassword
+	){
+
+	}
 }

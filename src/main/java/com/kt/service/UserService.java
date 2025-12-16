@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.kt.common.exception.CustomException;
+import com.kt.common.exception.ErrorCode;
+import com.kt.common.support.Preconditions;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
 import com.kt.repository.user.UserRepository;
@@ -44,6 +47,23 @@ public class UserService {
 			request.email(),
 			request.mobile()
 		);
+	}
+
+	//비밀번호 수정
+	public void changePassword(UserRequest.ChangePassword request, Long id){
+
+		var user = userRepository.findByIdOrThrow(id);
+
+		//비밀번호가 다르면 예외처리
+		Preconditions.validate(user.getPassword().equals(request.newPassword()),
+			ErrorCode.DOES_NOT_MATCH_OLD_PASSWORD);
+		//지금 비밀번호랑 새로운 비밀번호랑 같으면 예외처리
+		Preconditions.validate(!request.oldPassword().equals(request.newPassword()),
+			ErrorCode.CAN_NOT_ALLOWED_SAME_PASSWORD);
+
+
+		user.changePassword(request.newPassword());
+
 	}
 
 

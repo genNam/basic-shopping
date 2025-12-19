@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class AdminUserService extends BaseEntity {
+public class AdminService extends BaseEntity {
 
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;

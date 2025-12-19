@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kt.common.response.ApiResult;
 import com.kt.common.support.SwaggerAssistance;
 import com.kt.dto.product.ProductResponse;
-import com.kt.service.ProductService;
+import com.kt.service.product.ProductService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

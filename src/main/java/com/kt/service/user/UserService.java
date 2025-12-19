@@ -1,10 +1,10 @@
-package com.kt.service;
+package com.kt.service.user;
 
 import java.time.LocalDateTime;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kt.common.exception.CustomException;
 import com.kt.common.exception.ErrorCode;
 import com.kt.common.support.Preconditions;
 import com.kt.domain.user.User;
@@ -21,13 +21,14 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	public void create(UserRequest.Create request){
 
 		userRepository.save(
 			User.create(
 				request.loginId(),
-				request.password(),
+				passwordEncoder.encode(request.password()),
 				request.name(),
 				request.email(),
 				request.mobile(),

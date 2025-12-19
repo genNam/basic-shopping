@@ -68,6 +68,25 @@ public class User extends BaseEntity {
 		);
 	}
 
+	//관리자 생성
+	public static User createAdmin(String loginId, String password,
+		String name, String email, String mobile, Gender gender,
+		LocalDate birthday,LocalDateTime createdAt, LocalDateTime updatedAt){
+
+		return new User(
+			loginId,
+			password,
+			name,
+			email,
+			mobile,
+			gender,
+			birthday,
+			createdAt,
+			updatedAt,
+			Role.ADMIN
+		);
+	}
+
 	public void update(String name, String email, String mobile){
 		//영속성 컨텍스트에서 관리하는 엔티티를 수정
 		//JPA는 현재 엔티티랑 처음 저장된 값(스냅샷)을 비교해 변경된걸 감지하고 UPDATE 쿼리를 생성

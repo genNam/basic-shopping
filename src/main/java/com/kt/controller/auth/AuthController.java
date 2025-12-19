@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kt.common.response.ApiResult;
 import com.kt.dto.auth.LoginRequest;
 import com.kt.dto.auth.LoginResponse;
-import com.kt.service.AuthService;
+import com.kt.service.auth.AuthService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

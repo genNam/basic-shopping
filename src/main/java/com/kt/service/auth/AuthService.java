@@ -1,4 +1,4 @@
-package com.kt.service;
+package com.kt.service.auth;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

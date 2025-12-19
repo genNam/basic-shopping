@@ -18,7 +18,7 @@ import com.kt.common.response.ApiResult;
 import com.kt.common.support.SwaggerAssistance;
 import com.kt.dto.product.ProductRequest;
 import com.kt.dto.product.ProductResponse;
-import com.kt.service.ProductService;
+import com.kt.service.product.ProductService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

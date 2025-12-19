@@ -4,8 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
 import com.kt.dto.user.UserRequest;
-import com.kt.service.user.AdminUserService;
-import com.kt.service.user.UserService;
+import com.kt.service.user.AdminService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -15,9 +14,9 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
-public class AdminUserController {
+public class AdminController {
 
-	private final AdminUserService adminUserService;
+	private final AdminService adminUserService;
 
 	@PostMapping
 	public ApiResult<Void> create(

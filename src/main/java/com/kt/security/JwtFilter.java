@@ -19,15 +19,17 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-	private static final String TOKEN_PREFIX = "Bearer ";
+	private static final String TOKEN_PREFIX = "Bearer";
 
 	private final JwtService jwtService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws ServletException, IOException {
-		var header = request.getHeader(HttpHeaders.AUTHORIZATION);
+
+		//http 요청 헤더 중 "authorization" 부분찾기(이 부분에 '토큰'이 들어있음)
 		// Bearer {token}
+		var header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
 		if (Strings.isBlank(header)) {
 			filterChain.doFilter(request, response);
@@ -42,6 +44,10 @@ public class JwtFilter extends OncePerRequestFilter {
 		}
 
 		var id = jwtService.parseId(token);
+
+		//역할
+		//TODO : 인가(권한) 로직 추가
+		var role = jwtService.parseRole(token);
 
 		var techUpToken = new TechUpAuthenticationToken(
 			new DefaultCurrentUser(id, "파싱한아이디"),

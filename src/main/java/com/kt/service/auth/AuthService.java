@@ -31,8 +31,8 @@ public class AuthService {
 		Preconditions.validate(passwordEncoder.matches(
 			password, user.getPassword()), (ErrorCode.FAIL_LOGIN));
 
-		var accessToken = jwtService.issue(user.getId(), jwtService.getAccessExpiration());
-		var refreshToken = jwtService.issue(user.getId(), jwtService.getRefreshExpiration());
+		var accessToken = jwtService.issue(user.getId(), user.getRole(), jwtService.getAccessExpiration());
+		var refreshToken = jwtService.issue(user.getId(), user.getRole(), jwtService.getRefreshExpiration());
 
 		return Pair.of(accessToken, refreshToken);
 	}

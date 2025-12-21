@@ -3,6 +3,7 @@ package com.kt.controller.user;
 import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
+import com.kt.common.support.SwaggerAssistance;
 import com.kt.dto.user.UserRequest;
 import com.kt.service.user.AdminService;
 
@@ -14,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController extends SwaggerAssistance {
 
 	private final AdminService adminUserService;
 

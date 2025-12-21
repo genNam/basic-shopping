@@ -10,9 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-//구현체
-//인증이 끝난 후의 사용자
-
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -44,7 +41,7 @@ public class DefaultCurrentUser implements UserDetails, CurrentUser {
 	}
 
 	@Override
-	//스프링 시큐리티 내부에서 사용자를 식별하기 위해 구현
+
 	public String getUsername() {
 		return id.toString();
 	}

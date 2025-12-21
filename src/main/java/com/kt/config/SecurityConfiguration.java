@@ -35,6 +35,16 @@ public class SecurityConfiguration {
 	private static final String[] PATCH_PERMIT_ALL = {"/api/v1/public/**"};
 	private static final String[] DELETE_PERMIT_ALL = {"/api/v1/public/**"};
 
+	/*
+	//역할에 따른 인가 설정
+	private static final String[] ADMIN_LIST = { "/admin/**" };
+	private static final String[] LOGIN_LIST = { "/my/**" };
+
+
+	private final String USER = "USER";
+	private final String ADMIN = "ADMIN";
+	 */
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

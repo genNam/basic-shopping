@@ -4,6 +4,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
+import com.kt.common.support.SwaggerAssistance;
 import com.kt.dto.user.UserRequest;
 import com.kt.dto.user.UserResponse;
 import com.kt.security.CurrentUser;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/my")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController extends SwaggerAssistance {
 
 	private final UserService userService;
 

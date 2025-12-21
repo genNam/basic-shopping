@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.kt.common.response.ApiResult;
+import com.kt.common.support.SwaggerAssistance;
 import com.kt.dto.auth.LoginRequest;
 import com.kt.dto.auth.LoginResponse;
 import com.kt.service.auth.AuthService;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController extends SwaggerAssistance {
 
 	private final AuthService authService;
 
@@ -26,7 +27,7 @@ public class AuthController {
 
 		var pair = authService.login(request.loginId(), request.password());
 
-		return ApiResult.ok(new LoginResponse(pair.getLeft(), pair.getRight()));
+		return ApiResult.ok(new LoginResponse(pair.getLeft(), pair.getRight())); //응답객체 생성
 
 	}
 }

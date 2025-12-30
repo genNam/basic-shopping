@@ -1,13 +1,11 @@
 package com.kt.controller.order;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
 import com.kt.dto.order.OrderCreateRequest;
+import com.kt.dto.order.OrderResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.order.OrderService;
 
@@ -26,10 +24,20 @@ public class OrderController {
 		@AuthenticationPrincipal CurrentUser currentUser,
 		@RequestBody @Valid OrderCreateRequest request
 	){
-
 		orderService.create(currentUser.getId(),request);
 
 		return ApiResult.ok();
 
+	}
+
+	//사용자 주문 조회
+	@GetMapping("/{id}")
+	public ApiResult<OrderResponse.UserDetail> userDetail(
+		@AuthenticationPrincipal CurrentUser currentUser,
+		@PathVariable Long id
+	){
+		var detail = orderService.userDetail(id);
+
+		return ApiResult.ok(detail);
 	}
 }

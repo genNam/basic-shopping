@@ -1,5 +1,7 @@
 package com.kt.service.order;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +12,8 @@ import com.kt.domain.order.Order;
 import com.kt.domain.order.Receiver;
 import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.dto.order.OrderCreateRequest;
+import com.kt.dto.order.OrderResponse;
+import com.kt.dto.orderproduct.OrderProductResponse;
 import com.kt.repository.order.OrderRepository;
 import com.kt.repository.orderproduct.OrderProductRepository;
 import com.kt.repository.product.ProductRepository;
@@ -27,8 +31,8 @@ public class OrderService {
 	private final OrderProductRepository orderProductRepository;
 	private final ProductRepository productRepository;
 	private final UserRepository userRepository;
-	private final ProductService productService;
 
+	//주문 생성
 	public void create(Long userId, OrderCreateRequest request){
 
 		//상품이 있는지
@@ -65,4 +69,19 @@ public class OrderService {
 		orderProductRepository.save(orderProduct);
 
 	}
+
+	//사용자 주문 상세 조회
+	public OrderResponse.UserDetail userDetail(Long orderId){
+
+		//주문id로 주문 조회
+		var order = orderRepository.findById(orderId)
+				.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
+
+		//주문에 포함된 주문 상품
+		List<OrderProduct> orderProducts = order.getOrderProducts();
+
+		return OrderResponse.UserDetail.of(order);
+
+	}
+
 }

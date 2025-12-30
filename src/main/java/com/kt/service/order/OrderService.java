@@ -156,4 +156,14 @@ public class OrderService {
 
 	}
 
+	//관리자 주문 취소
+	public void adminCancel(Long userId, Long orderId){
+
+		//주문이 있는지 확인
+		var order = orderRepository.findById(orderId)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
+
+		order.adminCancel();
+	}
+
 }

@@ -14,6 +14,7 @@ public enum ErrorCode {
 
 	//주문
 	INVALID_ORDER_QUANTITY(HttpStatus.BAD_REQUEST, "주문 수량은 0 이상이어야 합니다."),
+	NOT_FOUND_ORDER(HttpStatus.BAD_REQUEST, "주문을 찾을 수 없습니다."),
 
 	//비밀번호
 	DOES_NOT_MATCH_OLD_PASSWORD(HttpStatus.BAD_REQUEST, "기존 비밀번호가 일치하지 않습니다"),

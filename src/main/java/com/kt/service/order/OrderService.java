@@ -71,17 +71,24 @@ public class OrderService {
 	}
 
 	//사용자 주문 상세 조회
-	public OrderResponse.UserDetail userDetail(Long orderId){
+	public OrderResponse.UserDetail userDetail(Long userId, Long orderId){
 
-		//주문id로 주문 조회
-		var order = orderRepository.findById(orderId)
-				.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
-
-		//주문에 포함된 주문 상품
-		List<OrderProduct> orderProducts = order.getOrderProducts();
+		//주문이 내 주문이(userId) 맞는지
+		var order = orderRepository.findByIdAndUserId(userId, orderId)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
 
 		return OrderResponse.UserDetail.of(order);
 
 	}
+
+	//사용자 주문 리스트 조회
+	/*
+	public List<OrderResponse> userList(){
+
+		var user = userRepository.findById(userId);
+
+		var orderList = orderRepository.findByAllIdAndUser(userId);
+
+	}*/
 
 }

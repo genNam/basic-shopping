@@ -3,6 +3,7 @@ package com.kt.controller.order;
 import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -58,6 +59,14 @@ public class AdminOrderController {
 		return ApiResult.ok();
 	}
 
-
 	//관리자 주문 취소
+	@DeleteMapping("/{id}/cancel")
+	public ApiResult<Void> adminCancel(
+		@AuthenticationPrincipal CurrentUser currentUser,
+		@PathVariable Long id
+	){
+		orderService.adminCancel(currentUser.getId(),id);
+
+		return ApiResult.ok();
+	}
 }

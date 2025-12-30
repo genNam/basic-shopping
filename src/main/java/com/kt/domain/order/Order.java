@@ -90,6 +90,11 @@ public class Order extends BaseEntity {
 		}
 	}
 
+	//관리자 주문 삭제
+	public void adminCancel(){
+		this.orderStatus = OrderStatus.CANCELLED;
+	}
+
 	//수정 가능한 상태인지 확인
 	private boolean canUpdate(){
 

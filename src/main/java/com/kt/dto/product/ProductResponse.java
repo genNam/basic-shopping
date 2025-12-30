@@ -5,12 +5,18 @@ import java.time.LocalDateTime;
 import com.kt.domain.product.Product;
 import com.kt.domain.product.ProductStatus;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class ProductResponse {
 
 	//관리자 리스트 조회
 	public record AdminList(
+		@NotBlank
 		String name,
+		@NotNull
 		Long price,
+		@NotNull
 		Long quantity
 	){
 		public static AdminList from(Product product){
@@ -28,11 +34,17 @@ public class ProductResponse {
 	//관리자 상세 조회
 	public record AdminDetail(
 
+		@NotNull
 		Long id,
+		@NotBlank
 		String name,
+		@NotNull
 		Long price,
+		@NotNull
 		Long quantity,
+		@NotNull
 		LocalDateTime createdAt,
+		@NotNull
 		ProductStatus status
 
 	){
@@ -51,8 +63,9 @@ public class ProductResponse {
 
 	//사용자 리스트 조회
 	public record UserList(
-
+		@NotBlank
 		String name,
+		@NotNull
 		Long price
 	){
 		public static UserList from(Product product){
@@ -67,7 +80,9 @@ public class ProductResponse {
 	//사용자 상세 조회
 	public record UserDetail(
 
+		@NotBlank
 		String name,
+		@NotNull
 		Long price,
 		boolean status
 

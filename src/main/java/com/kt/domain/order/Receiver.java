@@ -20,6 +20,6 @@ public class Receiver {
 	private String receiverAddress;
 
 	@Column(name = "receiver_mobile")
-	private String mobile;
+	private String receiverMobile;
 
 }

@@ -75,6 +75,13 @@ public class Order extends BaseEntity {
 		}
 
 	}
+	//관리자 주문 상태 변경
+	public void changeStatus(OrderStatus orderStatus){
+
+		this.orderStatus = orderStatus;
+
+	}
+
 	//사용자 주문 삭제
 	public void cancel(){
 

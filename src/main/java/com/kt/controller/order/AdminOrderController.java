@@ -5,14 +5,18 @@ import java.util.List;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.common.response.ApiResult;
+import com.kt.dto.order.OrderRequest;
 import com.kt.dto.order.OrderResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.order.OrderService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -43,5 +47,17 @@ public class AdminOrderController {
 	}
 
 	//관리자 주문 상태 변경
+	@PutMapping("/{id}/change-status")
+	public ApiResult<Void> adminStatusChange(
+		@AuthenticationPrincipal CurrentUser currentUser,
+		@RequestBody @Valid OrderRequest.ChangeStatus request,
+		@PathVariable Long id
+	){
+		orderService.adminChangeStatus(currentUser.getId(), request, id);
+
+		return ApiResult.ok();
+	}
+
+
 	//관리자 주문 취소
 }

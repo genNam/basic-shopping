@@ -83,14 +83,14 @@ public class OrderResponse {
 		@NotNull
 		LocalDateTime createdAt,
 		@NotBlank
-		List<OrderProductResponse.UserProductList> productName
+		List<OrderProductResponse.ProductNameList> productName
 
 
 	){
 		public static UserList from(Order order){
 
 			var productNames = order.getOrderProducts().stream()
-				.map(p -> OrderProductResponse.UserProductList.from(p))
+				.map(p -> OrderProductResponse.ProductNameList.from(p))
 				.toList();
 
 			return new UserList(
@@ -98,6 +98,35 @@ public class OrderResponse {
 				order.getTotalPrice(),
 				order.getCreatedAt(),
 				productNames
+			);
+		}
+	}
+
+	//관리자 주문 리스트 조회
+	public record AdminList(
+
+		@NotNull
+		Long OrderId,
+		@NotNull
+		Long totalPrice,
+		@NotNull
+		LocalDateTime createdAt,
+		@NotBlank
+		List<OrderProductResponse.ProductNameList> productName
+	){
+		public static AdminList from(Order order){
+
+			var productNames = order.getOrderProducts().stream()
+				.map(p -> OrderProductResponse.ProductNameList.from(p))
+				.toList();
+
+			return new AdminList(
+
+				order.getId(),
+				order.getTotalPrice(),
+				order.getCreatedAt(),
+				productNames
+
 			);
 		}
 	}

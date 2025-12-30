@@ -1,5 +1,7 @@
 package com.kt.controller.order;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +33,15 @@ public class AdminOrderController {
 		return ApiResult.ok(response);
 	}
 	//관리자 주문 리스트 조회
+	@GetMapping
+	public ApiResult<List<OrderResponse.AdminList>> adminList(
+		@AuthenticationPrincipal CurrentUser currentUser
+	){
+		var response = orderService.adminList(currentUser.getId());
+
+		return ApiResult.ok(response);
+	}
+
 	//관리자 주문 상태 변경
 	//관리자 주문 취소
 }

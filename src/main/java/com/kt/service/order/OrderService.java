@@ -118,7 +118,7 @@ public class OrderService {
 	}
 
 	//사용자 주문 수정
-	public void userUpdate(Long userId, OrderRequest.userUpdate request, Long orderId){
+	public void userUpdate(Long userId, OrderRequest.UserUpdate request, Long orderId){
 
 		//주문이 내 주문이 맞는지 확인
 		var order = orderRepository.findByIdAndUserId(userId, orderId)
@@ -130,6 +130,18 @@ public class OrderService {
 				request.receiverMobile(),
 				request.receiverAddress()
 			)
+		);
+	}
+
+	//관리자 주문 상태 변경
+	public void adminChangeStatus(Long userId, OrderRequest.ChangeStatus request,Long orderId){
+
+		//주문이 있는지 확인
+		var order = orderRepository.findById(orderId)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
+
+		order.changeStatus(
+			request.orderStatus()
 		);
 	}
 

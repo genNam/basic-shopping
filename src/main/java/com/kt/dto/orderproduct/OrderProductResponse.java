@@ -27,4 +27,16 @@ public class OrderProductResponse {
 		}
 
 	}
+
+	public record UserProductList(
+		@NotBlank
+		String ProductName
+	){
+		public static UserProductList from(OrderProduct orderProduct){
+
+			return new UserProductList(
+				orderProduct.getProduct().getName()
+			);
+		}
+	}
 }

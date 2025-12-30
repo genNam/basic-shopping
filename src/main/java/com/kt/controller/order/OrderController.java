@@ -44,13 +44,12 @@ public class OrderController {
 	}
 
 	//사용자 주문 리스트 조회
-	/*
 	@GetMapping
-	public ApiResult<List<OrderResponse>> userList(
+	public ApiResult<List<OrderResponse.UserList>> userList(
 		@AuthenticationPrincipal CurrentUser currentUser
 	){
-		var orderList = orderService.userList();
+		var orderList = orderService.userList(currentUser.getId());
 
 		return ApiResult.ok(orderList);
-	}*/
+	}
 }

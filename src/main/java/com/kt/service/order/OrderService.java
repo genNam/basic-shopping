@@ -33,7 +33,7 @@ public class OrderService {
 	private final UserRepository userRepository;
 
 	//주문 생성
-	public void create(Long userId, OrderCreateRequest request){
+	public void create(Long userId, OrderCreateRequest request) {
 
 		//상품이 있는지
 		var product = productRepository.findById(request.productId())
@@ -56,7 +56,7 @@ public class OrderService {
 		var order = Order.create(user, receiver);
 
 		//주문 상품 생성
-		var orderProduct = new OrderProduct(order,product,request.quantity(), request.price());
+		var orderProduct = new OrderProduct(order, product, request.quantity(), request.price());
 
 		//연관관계
 		product.mapToOrderProduct(orderProduct);
@@ -71,24 +71,27 @@ public class OrderService {
 	}
 
 	//사용자 주문 상세 조회
-	public OrderResponse.UserDetail userDetail(Long userId, Long orderId){
+	public OrderResponse.UserDetail userDetail(Long userId, Long orderId) {
 
 		//주문이 내 주문이(userId) 맞는지
 		var order = orderRepository.findByIdAndUserId(userId, orderId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
 
-		return OrderResponse.UserDetail.of(order);
-
+		return OrderResponse.UserDetail.from(order);
 	}
 
+
 	//사용자 주문 리스트 조회
-	/*
-	public List<OrderResponse> userList(){
+	public List<OrderResponse.UserList> userList(Long userId){
 
-		var user = userRepository.findById(userId);
+		//주문이 내 주문들이 맞는지 확인
+		var orders = orderRepository.findAllByUserId(userId);
 
-		var orderList = orderRepository.findByAllIdAndUser(userId);
+		var response = orders.stream()
+			.map(order-> OrderResponse.UserList.from(order))
+			.toList();
 
-	}*/
+		return response;
+	}
 
 }

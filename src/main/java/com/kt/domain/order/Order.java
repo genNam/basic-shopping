@@ -78,6 +78,13 @@ public class Order extends BaseEntity {
 		}
 
 	}
+	//사용자 주문 삭제
+	public void cancel(){
+
+		if(canUpdate()){
+			this.orderStatus = OrderStatus.CANCELLED;
+		}
+	}
 
 	//수정 가능한 상태인지 확인
 	private boolean canUpdate(){
@@ -88,7 +95,5 @@ public class Order extends BaseEntity {
 			return false;
 		}
 	}
-
-
 
 }

@@ -109,6 +109,16 @@ public class OrderService {
 				request.receiverAddress()
 			)
 		);
+	}
+
+	//사용자 주문 취소
+	public void userCancel(Long userId, Long orderId){
+
+		//주문이 내 주문이 맞는지 확인
+		var order = orderRepository.findByIdAndUserId(userId, orderId)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
+
+		order.cancel();
 
 	}
 

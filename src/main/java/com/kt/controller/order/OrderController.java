@@ -55,13 +55,24 @@ public class OrderController {
 	}
 
 	//사용자 주문 수정
-	@PutMapping("{/id}")
+	@PutMapping("/{id}")
 	public ApiResult<Void> userUpdate(
 		@AuthenticationPrincipal CurrentUser currentUser,
 		@RequestBody @Valid OrderRequest.userUpdate request,
 		@PathVariable Long id
 	){
 		orderService.userUpdate(currentUser.getId(),request,id);
+
+		return ApiResult.ok();
+	}
+
+	//사용자 주문 취소
+	@DeleteMapping(value = "/{id}/cancel")
+	public ApiResult<Void> userCancel(
+		@AuthenticationPrincipal CurrentUser currentUser,
+		@PathVariable Long id
+	){
+		orderService.userCancel(currentUser.getId(),id);
 
 		return ApiResult.ok();
 	}

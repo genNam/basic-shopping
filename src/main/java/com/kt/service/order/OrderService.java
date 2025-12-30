@@ -12,6 +12,7 @@ import com.kt.domain.order.Order;
 import com.kt.domain.order.Receiver;
 import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.dto.order.OrderCreateRequest;
+import com.kt.dto.order.OrderRequest;
 import com.kt.dto.order.OrderResponse;
 import com.kt.dto.orderproduct.OrderProductResponse;
 import com.kt.repository.order.OrderRepository;
@@ -92,6 +93,23 @@ public class OrderService {
 			.toList();
 
 		return response;
+	}
+
+	//사용자 주문 수정
+	public void userUpdate(Long userId, OrderRequest.userUpdate request, Long orderId){
+
+		//주문이 내 주문이 맞는지 확인
+		var order = orderRepository.findByIdAndUserId(userId, orderId)
+				.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
+
+		order.update(
+			new Receiver(
+				request.receiverName(),
+				request.receiverMobile(),
+				request.receiverAddress()
+			)
+		);
+
 	}
 
 }

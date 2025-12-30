@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.kt.common.response.ApiResult;
 import com.kt.dto.order.OrderCreateRequest;
+import com.kt.dto.order.OrderRequest;
 import com.kt.dto.order.OrderResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.order.OrderService;
@@ -51,5 +52,17 @@ public class OrderController {
 		var orderList = orderService.userList(currentUser.getId());
 
 		return ApiResult.ok(orderList);
+	}
+
+	//사용자 주문 수정
+	@PutMapping("{/id}")
+	public ApiResult<Void> userUpdate(
+		@AuthenticationPrincipal CurrentUser currentUser,
+		@RequestBody @Valid OrderRequest.userUpdate request,
+		@PathVariable Long id
+	){
+		orderService.userUpdate(currentUser.getId(),request,id);
+
+		return ApiResult.ok();
 	}
 }

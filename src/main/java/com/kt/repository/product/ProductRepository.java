@@ -1,7 +1,4 @@
 package com.kt.repository.product;
-
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.kt.common.exception.CustomException;

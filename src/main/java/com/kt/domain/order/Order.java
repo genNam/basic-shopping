@@ -3,8 +3,6 @@ package com.kt.domain.order;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import com.kt.common.support.BaseEntity;
 import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.domain.user.User;
@@ -49,7 +47,6 @@ public class Order extends BaseEntity {
 	}
 
 	public static Order create(User user, Receiver receiver){
-
 
 		return new Order(
 			user,

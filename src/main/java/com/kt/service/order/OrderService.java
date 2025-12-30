@@ -81,6 +81,15 @@ public class OrderService {
 		return OrderResponse.UserDetail.from(order);
 	}
 
+	//관리자 주문 상세 조회
+	public OrderResponse.AdminDetail adminDetail(Long adminId, Long orderId){
+
+		var order = orderRepository.findById(orderId)
+			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ORDER));
+
+		return OrderResponse.AdminDetail.from(order);
+	}
+
 
 	//사용자 주문 리스트 조회
 	public List<OrderResponse.UserList> userList(Long userId){

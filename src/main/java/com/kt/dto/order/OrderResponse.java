@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kt.domain.order.Order;
 import com.kt.domain.order.OrderStatus;
+import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.dto.orderproduct.OrderProductResponse;
 
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +41,38 @@ public class OrderResponse {
 
 		}
 	}
+	//관리자 주문 상세 조회
+	public record AdminDetail(
+
+		@NotNull
+		Long totalPrice,
+		@NotNull
+		LocalDateTime createdAt,
+		@NotNull
+		OrderStatus orderStatus,
+		@NotBlank
+		String receiverName,
+		@NotBlank
+		String receiverMobile,
+		@NotBlank
+		String receiverAddress,
+		@NotNull
+		List<OrderProduct> orderProducts
+	){
+		public static AdminDetail from(Order order){
+			return new AdminDetail(
+				order.getTotalPrice(),
+				order.getCreatedAt(),
+				order.getOrderStatus(),
+				order.getReceiver().getReceiverName(),
+				order.getReceiver().getReceiverMobile(),
+				order.getReceiver().getReceiverName(),
+				order.getOrderProducts()
+			);
+		}
+	}
+
+
 	//사용자 주문 리스트 조회
 	public record UserList(
 
@@ -67,7 +100,6 @@ public class OrderResponse {
 				productNames
 			);
 		}
-
 	}
 
 }

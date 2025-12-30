@@ -62,11 +62,31 @@ public class Order extends BaseEntity {
 		this.orderProducts.add(orderProduct);
 	}
 
+	/*
 	public void calculateTotalPrice(){
 		this.totalPrice = orderProducts.stream()
 			.mapToLong(p -> p.getPrice() * p.getQuantity()) //각 요쇼를 int로 변환
 			.sum();
 
+	}*/
+
+	//사용자가 주문 수정(배송 정보 수정)
+	public void update(Receiver receiver){
+
+		if(canUpdate()){
+			this.receiver = receiver;
+		}
+
+	}
+
+	//수정 가능한 상태인지 확인
+	private boolean canUpdate(){
+
+		if(orderStatus == OrderStatus.PENDING || orderStatus == OrderStatus.COMPLETED){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 

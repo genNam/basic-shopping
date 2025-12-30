@@ -1,5 +1,7 @@
 package com.kt.controller.order;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,14 +32,25 @@ public class OrderController {
 
 	}
 
-	//사용자 주문 조회
+	//사용자 주문 상세 조회
 	@GetMapping("/{id}")
 	public ApiResult<OrderResponse.UserDetail> userDetail(
 		@AuthenticationPrincipal CurrentUser currentUser,
 		@PathVariable Long id
 	){
-		var detail = orderService.userDetail(id);
+		var detail = orderService.userDetail(currentUser.getId(),id);
 
 		return ApiResult.ok(detail);
 	}
+
+	//사용자 주문 리스트 조회
+	/*
+	@GetMapping
+	public ApiResult<List<OrderResponse>> userList(
+		@AuthenticationPrincipal CurrentUser currentUser
+	){
+		var orderList = orderService.userList();
+
+		return ApiResult.ok(orderList);
+	}*/
 }

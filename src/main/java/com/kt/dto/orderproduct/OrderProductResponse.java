@@ -28,13 +28,13 @@ public class OrderProductResponse {
 
 	}
 
-	public record UserProductList(
+	public record ProductNameList(
 		@NotBlank
 		String ProductName
 	){
-		public static UserProductList from(OrderProduct orderProduct){
+		public static ProductNameList from(OrderProduct orderProduct){
 
-			return new UserProductList(
+			return new ProductNameList(
 				orderProduct.getProduct().getName()
 			);
 		}

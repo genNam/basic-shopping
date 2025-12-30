@@ -104,6 +104,19 @@ public class OrderService {
 		return response;
 	}
 
+	//관리자 주문 리스트 조회
+	public List<OrderResponse.AdminList> adminList(Long adminId){
+
+		//모든 주문들을 가져옴
+		var orders = orderRepository.findAll();
+
+		var response = orders.stream()
+			.map(order -> OrderResponse.AdminList.from(order))
+			.toList();
+
+		return response;
+	}
+
 	//사용자 주문 수정
 	public void userUpdate(Long userId, OrderRequest.userUpdate request, Long orderId){
 

@@ -2,6 +2,8 @@ package com.kt.service.review;
 
 import static com.kt.common.exception.ErrorCode.*;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +12,7 @@ import com.kt.common.exception.ErrorCode;
 import com.kt.common.support.Preconditions;
 import com.kt.domain.review.Review;
 import com.kt.dto.review.ReviewRequest;
+import com.kt.dto.review.ReviewResponse;
 import com.kt.repository.orderproduct.OrderProductRepository;
 import com.kt.repository.product.ProductRepository;
 import com.kt.repository.review.ReviewRepository;
@@ -52,15 +55,19 @@ public class ReviewService {
 
 	}
 
-	/*
 	//사용자 상품 리뷰 조회
-	public ReviewResponse.UserSearch userSearch(Long userId, Long productId){
+	public List<ReviewResponse.UserSearch> userSearch(Long productId){
 
-		//해당 상품의 리뷰 찾기
-		var reviewList = reviewRepository.
+		//해당 상품의 리뷰들
+		var reviewList = reviewRepository.findByProductId(productId);
+
+		//응답 생성
+		var response = reviewList.stream()
+			.map(review -> ReviewResponse.UserSearch.of(review))
+			.toList();
 
 
-		return
-	}*/
+		return response;
+	}
 
 }

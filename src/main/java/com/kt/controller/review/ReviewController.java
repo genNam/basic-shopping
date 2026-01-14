@@ -3,11 +3,13 @@ package com.kt.controller.review;
 import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.common.response.ApiResult;
@@ -46,20 +48,18 @@ public class ReviewController {
 	}
 
 	//상품 리뷰 수정(사용자)
-	//reviews/{id}
 	@PutMapping("/reviews/{id}")
 	public ApiResult<ReviewResponse.UserUpdate> userUpdate(
 		@AuthenticationPrincipal CurrentUser currentUser,
-		@RequestBody @Valid ReviewRequest.Update request
+		@RequestBody @Valid ReviewRequest.Update request,
+		@RequestParam Long id
 	){
-		var result = reviewService.userUpdate(currentUser.getId(), request);
+		var result = reviewService.userUpdate(id, currentUser.getId(), request);
 
 		return ApiResult.ok(result);
 	}
 	//상품 리뷰삭제(사용자)
 	//reviews/{id}
-
-
 	//상품리뷰조회(관리자)
 	//admin/reviews
 	//상품리뷰삭제(관리자)

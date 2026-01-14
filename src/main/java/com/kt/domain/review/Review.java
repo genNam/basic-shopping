@@ -1,5 +1,7 @@
 package com.kt.domain.review;
 
+import java.time.LocalDateTime;
+
 import com.kt.common.support.BaseEntity;
 import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.domain.product.Product;
@@ -34,8 +36,6 @@ public class Review extends BaseEntity {
 		this.orderProduct = orderProduct;
 		this.product = product;
 		this.content = content;
-		this.createdAt = getCreatedAt();
-		this.updatedAt = getUpdatedAt();
 	}
 
 	//리뷰 작성
@@ -48,6 +48,14 @@ public class Review extends BaseEntity {
 			orderProduct,
 			product
 		);
+	}
+
+	//리뷰 수정
+	public void update(String content){
+
+		this.content = content;
+		this.updatedAt = LocalDateTime.now();
+
 	}
 
 

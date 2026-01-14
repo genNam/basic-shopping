@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 
 public enum ErrorCode {
 
+	//리뷰
+	REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰를 찾을 수 없습니다."),
+
 	//주문 상품
 	NOT_FOUND_ORDER_PRODUCT(HttpStatus.NOT_FOUND, "주문 상품이 존재하지 않습니다."),
 	ORDER_PRODUCT_MISMATCH(HttpStatus.BAD_REQUEST, "구매한 상품이 아닙니다."),

@@ -19,4 +19,20 @@ public class ReviewRequest {
 	){
 
 	}
+
+	//리뷰 수정
+	public record Update(
+
+		@NotBlank
+		String content,
+
+		@NotNull
+		Long productId,
+
+		@NotNull
+		Long orderProductId
+
+	){
+
+	}
 }

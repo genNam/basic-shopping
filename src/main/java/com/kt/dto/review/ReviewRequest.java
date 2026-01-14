@@ -1,6 +1,5 @@
 package com.kt.dto.review;
 
-import com.kt.domain.orderproduct.OrderProduct;
 
 import jakarta.validation.constraints.*;
 
@@ -12,7 +11,10 @@ public class ReviewRequest {
 		String content,
 
 		@NotNull(message = "구매한 상품들에 대해서만 리뷰를 작성할 수 있습니다.")
-		Long orderProductId
+		Long orderProductId,
+
+		@NotNull
+		Long productId
 
 	){
 

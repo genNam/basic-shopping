@@ -14,6 +14,7 @@ public enum ErrorCode {
 
 	//주문 상품
 	NOT_FOUND_ORDER_PRODUCT(HttpStatus.NOT_FOUND, "주문 상품이 존재하지 않습니다."),
+	ORDER_PRODUCT_MISMATCH(HttpStatus.BAD_REQUEST, "구매한 상품이 아닙니다."),
 
 	//주문
 	INVALID_ORDER_QUANTITY(HttpStatus.BAD_REQUEST, "주문 수량은 0 이상이어야 합니다."),

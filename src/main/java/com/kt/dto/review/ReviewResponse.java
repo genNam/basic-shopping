@@ -43,4 +43,39 @@ public class ReviewResponse {
 		}
 
 	}
+
+	//리뷰 수정(사용자)
+	public record UserUpdate(
+
+		//상품
+		@NotNull
+		Long productId,
+
+		@NotBlank
+		String productName,
+
+		//작성자 이름
+		String userName,
+
+		//수정 날짜
+		LocalDateTime updateAt,
+
+		//리뷰 내용
+		String content
+
+	){
+		public static UserUpdate of(Review review){
+
+			return new UserUpdate(
+
+				review.getProduct().getId(),
+				review.getProduct().getName(),
+				review.getUser().getName(),
+				review.getUpdatedAt(),
+				review.getContent()
+
+			);
+		}
+
+	}
 }

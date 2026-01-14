@@ -30,7 +30,7 @@ public class ReviewService {
 	private final OrderProductRepository orderProductRepository;
 	private final ProductRepository productRepository;
 
-	public void create(Long userId, ReviewRequest.Create request){
+	public void create(Long userId, ReviewRequest.Create request) {
 
 		//userId에 해당하는 user 객체를 가져옴
 		var user = userRepository.findById(userId)
@@ -56,7 +56,7 @@ public class ReviewService {
 	}
 
 	//사용자 상품 리뷰 조회
-	public List<ReviewResponse.UserSearch> userSearch(Long productId){
+	public List<ReviewResponse.UserSearch> userSearch(Long productId) {
 
 		//해당 상품의 리뷰들
 		var reviewList = reviewRepository.findByProductId(productId);
@@ -66,6 +66,21 @@ public class ReviewService {
 			.map(review -> ReviewResponse.UserSearch.of(review))
 			.toList();
 
+		return response;
+	}
+
+	//사용자 리뷰 수정
+	public ReviewResponse.UserUpdate userUpdate(Long userId, ReviewRequest.Update request) {
+
+		//유저,상품과 일치하는 리뷰 가져오기
+		var review = reviewRepository.findByUserIdAndProductId(userId, request.productId())
+			.orElseThrow(() -> new CustomException(REVIEW_NOT_FOUND));
+
+		//수정하기
+		review.update(request.content());
+
+		//응답 객체 만들기
+		var response = ReviewResponse.UserUpdate.of(review);
 
 		return response;
 	}

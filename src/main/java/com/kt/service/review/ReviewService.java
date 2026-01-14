@@ -99,4 +99,28 @@ public class ReviewService {
 
 	}
 
+	//관리자 리뷰 조회
+	public List<ReviewResponse.AdminSearch> adminSearch(Long adminId){
+
+		//리뷰 조히
+		var reviews = reviewRepository.findAll();
+
+		//응답 객체 생성
+		var response = reviews.stream()
+			.map(review -> ReviewResponse.AdminSearch.of(review))
+			.toList();
+
+		return response;
+
+	}
+	//관리자 리뷰 삭제
+	public void adminDelete(Long adminId, Long reviewId){
+
+		//해당하는 리뷰가 있는지 확인
+		var review = reviewRepository.findById(reviewId)
+			.orElseThrow(() -> new CustomException(REVIEW_NOT_FOUND));
+
+		reviewRepository.delete(review);
+	}
+
 }

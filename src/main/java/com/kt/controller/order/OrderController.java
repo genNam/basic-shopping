@@ -58,7 +58,7 @@ public class OrderController {
 	@PutMapping("/{id}")
 	public ApiResult<Void> userUpdate(
 		@AuthenticationPrincipal CurrentUser currentUser,
-		@RequestBody @Valid OrderRequest.userUpdate request,
+		@RequestBody @Valid OrderRequest.UserUpdate request,
 		@PathVariable Long id
 	){
 		orderService.userUpdate(currentUser.getId(),request,id);

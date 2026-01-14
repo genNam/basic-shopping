@@ -12,9 +12,12 @@ import lombok.RequiredArgsConstructor;
 
 public enum ErrorCode {
 
+	//주문 상품
+	NOT_FOUND_ORDER_PRODUCT(HttpStatus.NOT_FOUND, "주문 상품이 존재하지 않습니다."),
+
 	//주문
 	INVALID_ORDER_QUANTITY(HttpStatus.BAD_REQUEST, "주문 수량은 0 이상이어야 합니다."),
-	NOT_FOUND_ORDER(HttpStatus.BAD_REQUEST, "주문을 찾을 수 없습니다."),
+	NOT_FOUND_ORDER(HttpStatus.NOT_FOUND, "주문을 찾을 수 없습니다."),
 
 	//비밀번호
 	DOES_NOT_MATCH_OLD_PASSWORD(HttpStatus.BAD_REQUEST, "기존 비밀번호가 일치하지 않습니다"),
@@ -22,11 +25,11 @@ public enum ErrorCode {
 
 	//유저
 	NOT_FOUND_USER(HttpStatus.BAD_REQUEST, "사용자를 찾을 수 없습니다."),
-	FAIL_LOGIN(HttpStatus.BAD_REQUEST, "존재하지 않는 회원입니다."),
+	FAIL_LOGIN(HttpStatus.NOT_FOUND, "존재하지 않는 회원입니다."),
 
 	//상품
 	PRODUCT_TOGGLE_NOT_ALLOWED(HttpStatus.BAD_REQUEST, "토글을 사용할 수 없습니다."),
-	NOT_FOUND_PRODUCT(HttpStatus.BAD_REQUEST, "상품을 찾을 수 없습니다."),
+	NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND, "상품을 찾을 수 없습니다."),
 	INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "필수값 누락입니다.");
 
 	private final HttpStatus status;

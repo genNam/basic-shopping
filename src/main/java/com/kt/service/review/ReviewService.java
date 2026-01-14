@@ -70,10 +70,11 @@ public class ReviewService {
 	}
 
 	//사용자 리뷰 수정
-	public ReviewResponse.UserUpdate userUpdate(Long userId, ReviewRequest.Update request) {
+	public ReviewResponse.UserUpdate userUpdate(Long reviewId, Long userId, ReviewRequest.Update request) {
+
 
 		//유저,상품과 일치하는 리뷰 가져오기
-		var review = reviewRepository.findByUserIdAndProductId(userId, request.productId())
+		var review = reviewRepository.findByIdAndUserIdAndProductId(reviewId,userId, request.productId())
 			.orElseThrow(() -> new CustomException(REVIEW_NOT_FOUND));
 
 		//수정하기

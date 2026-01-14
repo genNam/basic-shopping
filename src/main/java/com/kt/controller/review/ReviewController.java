@@ -59,9 +59,7 @@ public class ReviewController {
 		return ApiResult.ok(result);
 	}
 
-	/*
 	//상품 리뷰삭제(사용자)
-	//reviews/{id}
 	@DeleteMapping("/reviews/{id}")
 	public ApiResult<Void> delete(
 		@AuthenticationPrincipal CurrentUser currentUser,
@@ -70,7 +68,8 @@ public class ReviewController {
 		reviewService.delete(currentUser.getId(),id);
 
 		return ApiResult.ok();
-	}*/
+	}
+
 	//상품리뷰조회(관리자)
 	//admin/reviews
 	//상품리뷰삭제(관리자)

@@ -87,12 +87,16 @@ public class ReviewService {
 		return response;
 	}
 
-	/*
 	//사용자 리뷰 삭제
 	public void delete(Long userId, Long reviewId){
 
-		//유저와 일치하는
+		//유저와 일치하는 리뷰 찾기
+		var review = reviewRepository.findByIdAndUserId(reviewId,userId)
+			.orElseThrow(() -> new CustomException(REVIEW_NOT_FOUND));
 
-	}*/
+		//삭제하기
+		reviewRepository.delete(review);
+
+	}
 
 }

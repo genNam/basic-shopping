@@ -78,4 +78,35 @@ public class ReviewResponse {
 		}
 
 	}
+
+	//관리자 리뷰 조회
+	public record AdminSearch(
+
+		//상품
+		@NotNull
+		Long productId,
+
+		@NotBlank
+		String productName,
+
+		//작성자 이름
+		String userName,
+
+		//리뷰 내용
+		String content
+
+	){
+		public static AdminSearch of(Review review){
+
+			return new AdminSearch(
+
+				review.getProduct().getId(),
+				review.getProduct().getName(),
+				review.getUser().getName(),
+				review.getContent()
+
+			);
+		}
+
+	}
 }

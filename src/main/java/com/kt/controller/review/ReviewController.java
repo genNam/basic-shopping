@@ -1,7 +1,10 @@
 package com.kt.controller.review;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.common.response.ApiResult;
 import com.kt.dto.review.ReviewRequest;
+import com.kt.dto.review.ReviewResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.review.ReviewService;
 
@@ -33,7 +37,15 @@ public class ReviewController {
 	}
 
 	//상품 리뷰 조회(사용자)
-	//reviews?productId
+	@PostMapping("/reviews?productId")
+	public ApiResult<List<ReviewResponse.UserSearch>> userSearch(
+		@PathVariable Long productId
+	){
+		var result = reviewService.userSearch(productId);
+		return ApiResult.ok(result);
+	}
+
+
 	//상품 리뷰 수정(사용자)
 	//reviews/{id}
 	//상품 리뷰삭제(사용자)

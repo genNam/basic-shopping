@@ -14,12 +14,10 @@ import com.kt.domain.orderproduct.OrderProduct;
 import com.kt.dto.order.OrderCreateRequest;
 import com.kt.dto.order.OrderRequest;
 import com.kt.dto.order.OrderResponse;
-import com.kt.dto.orderproduct.OrderProductResponse;
 import com.kt.repository.order.OrderRepository;
 import com.kt.repository.orderproduct.OrderProductRepository;
 import com.kt.repository.product.ProductRepository;
 import com.kt.repository.user.UserRepository;
-import com.kt.service.product.ProductService;
 
 import lombok.RequiredArgsConstructor;
 

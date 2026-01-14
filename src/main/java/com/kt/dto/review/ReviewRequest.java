@@ -24,13 +24,7 @@ public class ReviewRequest {
 	public record Update(
 
 		@NotBlank
-		String content,
-
-		@NotNull
-		Long productId,
-
-		@NotNull
-		Long orderProductId
+		String content
 
 	){
 

@@ -74,7 +74,8 @@ public class ReviewService {
 
 
 		//유저,상품과 일치하는 리뷰 가져오기
-		var review = reviewRepository.findByIdAndUserIdAndProductId(reviewId,userId, request.productId())
+		//리뷰 id만으로도 unique 하므로 product에 대한 정보 필요x
+		var review = reviewRepository.findByIdAndUserId(reviewId,userId)
 			.orElseThrow(() -> new CustomException(REVIEW_NOT_FOUND));
 
 		//수정하기
@@ -85,5 +86,13 @@ public class ReviewService {
 
 		return response;
 	}
+
+	/*
+	//사용자 리뷰 삭제
+	public void delete(Long userId, Long reviewId){
+
+		//유저와 일치하는
+
+	}*/
 
 }

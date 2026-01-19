@@ -1,6 +1,7 @@
 package com.kt.service.user;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.kt.common.support.BaseEntity;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
+import com.kt.dto.user.UserResponse;
 import com.kt.repository.user.UserRepository;
 
-import jakarta.transaction.Transactional;
+//트랜잭션 어노테이션
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -36,5 +39,18 @@ public class AdminService extends BaseEntity {
 		);
 
 		userRepository.save(newAdmin);
+	}
+
+	//관리자의 회원 목록 조회
+	@Transactional(readOnly = true)
+	public List<UserResponse.AdminUserSearch> adminUserSearch(){
+
+		var userList = userRepository.findAll();
+
+		var response = userList.stream()
+			.map(u -> UserResponse.AdminUserSearch.from(u))
+			.toList();
+
+		return response;
 	}
 }

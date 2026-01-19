@@ -11,27 +11,34 @@ import com.kt.common.response.ApiResult;
 import com.kt.common.support.SwaggerAssistance;
 import com.kt.dto.user.UserResponse;
 import com.kt.security.CurrentUser;
+import com.kt.service.user.AdminService;
 import com.kt.service.user.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
-@Tag(name = "User")
+@Tag(name = "Admin-User")
 @RestController
 @RequestMapping("/admin/users")
 @RequiredArgsConstructor
 public class AdminUserController extends SwaggerAssistance {
 
-	private final UserService userService;
+	private final AdminService adminService;
 
 	//관리자가 '유저들'을 조회
-	@GetMapping
-	public ApiResult<List<UserResponse>> adminUserSearch(
-		@AuthenticationPrincipal CurrentUser currentUser
+	@GetMapping("/users")
+	public ApiResult<List<UserResponse.AdminUserSearch>> adminUserSearch(
 	){
-		userService;
+		var response = adminService.adminUserSearch();
 
-		return ApiResult.ok();
+		return ApiResult.ok(response);
 	}
+
+
+	//회원 상제 조회 /users/{id}
+	//회원 정보 수정 /users/{id}
+	//회원 비활성화 /users/{id}/in-activate
+	//회원 비밀번호 초기화 users/{id}/init-password
+	//회원 비밀번호 변경 {id}/change-password
 
 }

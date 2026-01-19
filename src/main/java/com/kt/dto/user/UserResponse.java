@@ -71,4 +71,25 @@ public class UserResponse {
 
 	}
 
+	//관리자의 회원 조회
+	public record AdminUserSearch(
+
+		Long userId,
+		String userName,
+		String mobile,
+		LocalDateTime createdAt
+
+	){
+		public static AdminUserSearch from(User user){
+			return new AdminUserSearch(
+
+				user.getId(),
+				user.getName(),
+				user.getMobile(),
+				user.getCreatedAt()
+
+			);
+		}
+	}
+
 }

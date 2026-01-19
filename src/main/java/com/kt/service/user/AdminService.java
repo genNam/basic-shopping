@@ -44,23 +44,4 @@ public class AdminService extends BaseEntity {
 	}
 
 
-
-	//관리자가 회원 비밀번호 초기화
-	public void adminUserInitPassword(Long userId){
-
-		var user = userRepository.findByIdOrThrow(userId);
-	}
-
-	//관리자가 회원 비밀번호 변경
-	public void adminUserChangePassword(Long userId, UserRequest.ChangePassword request){
-
-		var user = userRepository.findByIdOrThrow(userId);
-
-		//비밀번호가 다르면 예외처리
-		Preconditions.validate(user.getPassword().equals(request.oldPassword()), ErrorCode.DOES_NOT_MATCH_OLD_PASSWORD);
-		//비밀번호가 같으면 예외처리
-		Preconditions.validate(request.oldPassword().equals(request.newPassword()), ErrorCode.CAN_NOT_ALLOWED_SAME_PASSWORD);
-
-		user.changePassword(request.newPassword());
-	}
 }

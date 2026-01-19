@@ -157,5 +157,32 @@ public class UserService {
 		user.softDelete();
 	}
 
+	//관리자가 회원 비밀번호 초기화
+	public void adminUserInitPassword(Long userId){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		String initPassword = "0";
+		String encodedPassword = passwordEncoder.encode(initPassword);
+
+		user.changePassword(encodedPassword);
+
+	}
+
+	//관리자가 회원 비밀번호 변경
+	public void adminUserChangePassword(Long userId, UserRequest.ChangePassword request){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		//비밀번호가 같으면 예외처리
+		Preconditions.validate(request.oldPassword().equals(request.newPassword()), ErrorCode.CAN_NOT_ALLOWED_SAME_PASSWORD);
+
+		//사용자가 입력한 새 비밀번호를 PasswordEncoder로 해시해서 저장 가능한 형태로 만드는 코드
+		//비밀번호를 안전하게 저장하기 위해 passwordEncoder 사용
+		String encodedPassword = passwordEncoder.encode(request.newPassword());
+
+		user.changePassword(encodedPassword);
+	}
+
 
 }

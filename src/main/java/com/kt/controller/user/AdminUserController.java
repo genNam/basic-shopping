@@ -62,5 +62,23 @@ public class AdminUserController extends SwaggerAssistance {
 		return ApiResult.ok();
 	}
 
+	//비밀번호 초기화
+	@PatchMapping("/users/{id}/init-password")
+	public ApiResult<Void> adminUserInitPassword(
+		@PathVariable Long id
+	){
+		userService.adminUserInitPassword(id);
+		return ApiResult.ok();
+	}
+
+	//비밀번호 재설정
+	@PatchMapping("/users/{id}/change-password")
+	public ApiResult<Void> adminUserChangePassword(
+		@PathVariable Long id,
+		@RequestBody @Valid UserRequest.ChangePassword request
+	){
+		userService.adminUserChangePassword(id,request);
+		return ApiResult.ok();
+	}
 
 }

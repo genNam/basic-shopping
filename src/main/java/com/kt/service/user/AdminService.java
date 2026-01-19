@@ -62,4 +62,13 @@ public class AdminService extends BaseEntity {
 
 		return UserResponse.AdminUserDetail.from(user);
 	}
+
+	//관리자 회원 정보 수정
+	public void adminUserUpdate(Long userId){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		//회원정보 수정(업데이트)
+		user.update(user.getName(), user.getEmail(), user.getMobile());
+	}
 }

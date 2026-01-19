@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,9 +41,15 @@ public class AdminUserController extends SwaggerAssistance {
 		return ApiResult.ok(response);
 	}
 
+	@PutMapping("/user/{id}")
+	public ApiResult<Void> adminUserUpdate(
+		@PathVariable Long id
+	){
+		adminService.adminUserUpdate(id);
+		return ApiResult.ok();
+	}
 
-	//회원 상제 조회 /users/{id}
-	//회원 정보 수정 /users/{id}
+
 	//회원 비활성화 /users/{id}/in-activate
 	//회원 비밀번호 초기화 users/{id}/init-password
 	//회원 비밀번호 변경 {id}/change-password

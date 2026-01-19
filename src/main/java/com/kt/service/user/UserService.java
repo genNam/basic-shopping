@@ -69,8 +69,8 @@ public class UserService {
 		Preconditions.validate(!request.oldPassword().equals(request.newPassword()),
 			ErrorCode.CAN_NOT_ALLOWED_SAME_PASSWORD);
 
-
-		user.changePassword(request.newPassword());
+		String encodedPassword = passwordEncoder.encode(request.newPassword());
+		user.changePassword(encodedPassword);
 
 	}
 

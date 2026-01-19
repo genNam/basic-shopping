@@ -12,9 +12,11 @@ import com.kt.dto.order.OrderResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.order.OrderService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Order")
 @RestController
 @RequestMapping("/orders") //사용자는 여러 주문을 가질 수 있으니까 orders
 @RequiredArgsConstructor

@@ -24,8 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@Tag(name = "Admin")
-@Tag(name = "Product")
+@Tag(name = "Admin-Product")
 @RestController
 @RequestMapping("/admin/products")
 @RequiredArgsConstructor

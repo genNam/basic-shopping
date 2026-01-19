@@ -17,9 +17,11 @@ import com.kt.dto.order.OrderResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.order.OrderService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Admin-Order")
 @RestController
 @RequestMapping("/admin/orders")
 @RequiredArgsConstructor

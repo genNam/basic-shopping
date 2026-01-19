@@ -15,9 +15,11 @@ import com.kt.dto.auth.TokenReissueRequest;
 import com.kt.dto.auth.TokenResponse;
 import com.kt.service.auth.AuthService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Auth")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor

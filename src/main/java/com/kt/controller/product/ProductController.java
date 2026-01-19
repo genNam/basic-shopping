@@ -15,7 +15,6 @@ import com.kt.service.product.ProductService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
-@Tag(name = "User")
 @Tag(name = "Product")
 @RestController //json 데이터를 반환하는 컨트롤러
 @RequestMapping("/products")

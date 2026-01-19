@@ -15,8 +15,10 @@ import com.kt.dto.review.ReviewResponse;
 import com.kt.security.CurrentUser;
 import com.kt.service.review.ReviewService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Admin-Review")
 @RestController
 @RequestMapping("/admin/reviews")
 @RequiredArgsConstructor

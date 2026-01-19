@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 
 public enum ErrorCode {
 
+	//인증
+	INVALID_REFRESH_TOKEN(HttpStatus.BAD_REQUEST, "유효하지 않은 토큰입니다."),
+
 	//리뷰
 	REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰를 찾을 수 없습니다."),
 

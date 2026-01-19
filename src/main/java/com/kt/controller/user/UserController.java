@@ -1,5 +1,7 @@
 package com.kt.controller.user;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,6 +73,17 @@ public class UserController extends SwaggerAssistance {
 		var response = userService.detail(currentUser.getId());
 
 		return ApiResult.ok(response);
+	}
+
+	//내 주문 조회
+	@GetMapping("/orders")
+	public ApiResult<List<UserResponse.MyOrders>> myOrders(
+		@AuthenticationPrincipal CurrentUser currentUser
+	){
+		var response = userService.myOrders(currentUser.getId());
+
+		return ApiResult.ok(response);
+
 	}
 
 }

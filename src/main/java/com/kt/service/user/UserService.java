@@ -1,6 +1,7 @@
 package com.kt.service.user;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,11 @@ import com.kt.common.support.Preconditions;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
 import com.kt.dto.user.UserResponse;
+import com.kt.repository.order.OrderRepository;
 import com.kt.repository.user.UserRepository;
 
-import jakarta.transaction.Transactional;
+//트랜잭션 어노테이션
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -21,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final OrderRepository orderRepository;
 	private final PasswordEncoder passwordEncoder;
 
 	public void create(UserRequest.Create request){
@@ -75,10 +79,24 @@ public class UserService {
 	}
 
 	//내 정보 조회
+	//조회용 메서드를 만들때 사용 -> 성능적으로 더 이점이 있음
+	@Transactional(readOnly = true)
 	public UserResponse.Detail detail(Long id){
 
 		var user = userRepository.findByIdOrThrow(id);
 		var response = UserResponse.Detail.from(user);
+
+		return response;
+	}
+
+	//내 주문 조회
+	@Transactional(readOnly = true)
+	public List<UserResponse.MyOrders> myOrders(Long userId){
+
+		var orderList = orderRepository.findByUserId(userId);
+		var response = orderList.stream()
+			.map(o -> UserResponse.MyOrders.from(o))
+			.toList();
 
 		return response;
 	}

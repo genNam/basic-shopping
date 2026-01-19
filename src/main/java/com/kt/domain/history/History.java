@@ -1,6 +1,5 @@
 package com.kt.domain.history;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.kt.common.support.BaseEntity;
 
 import jakarta.persistence.Entity;
@@ -22,7 +21,7 @@ public class History extends BaseEntity {
 	private Long userId;
 
 	public History(HistoryType type, String content, Long userId){
-		this.type = type;
+		this.historyType = type;
 		this.content = content;
 		this.userId = userId;
 	}

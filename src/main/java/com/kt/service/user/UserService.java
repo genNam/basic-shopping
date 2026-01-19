@@ -12,6 +12,7 @@ import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
 import com.kt.dto.user.UserResponse;
 import com.kt.repository.order.OrderRepository;
+import com.kt.repository.review.ReviewRepository;
 import com.kt.repository.user.UserRepository;
 
 //트랜잭션 어노테이션
@@ -25,6 +26,7 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final OrderRepository orderRepository;
+	private final ReviewRepository reviewRepository;
 	private final PasswordEncoder passwordEncoder;
 
 	public void create(UserRequest.Create request){
@@ -96,6 +98,18 @@ public class UserService {
 		var orderList = orderRepository.findByUserId(userId);
 		var response = orderList.stream()
 			.map(o -> UserResponse.MyOrders.from(o))
+			.toList();
+
+		return response;
+	}
+
+	//내 리뷰 조회
+	@Transactional(readOnly = true)
+	public List<UserResponse.MyReviews> myReviews(Long userId){
+
+		var reviewList = reviewRepository.findByUserId(userId);
+		var response = reviewList.stream()
+			.map(r->UserResponse.MyReviews.from(r))
 			.toList();
 
 		return response;

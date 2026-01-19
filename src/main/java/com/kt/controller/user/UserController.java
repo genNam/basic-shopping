@@ -86,4 +86,14 @@ public class UserController extends SwaggerAssistance {
 
 	}
 
+	//내 리뷰 조회
+	@GetMapping("/reviews")
+	public ApiResult<List<UserResponse.MyReviews>> myReviews(
+		@AuthenticationPrincipal CurrentUser currentUser
+	){
+		var response = userService.myReviews(currentUser.getId());
+
+		return ApiResult.ok(response);
+	}
+
 }

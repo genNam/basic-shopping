@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.kt.domain.order.Order;
 import com.kt.domain.order.OrderStatus;
+import com.kt.domain.review.Review;
 import com.kt.domain.user.User;
 
 public class UserResponse {
@@ -46,6 +47,28 @@ public class UserResponse {
 
 			);
 		}
+	}
+
+	//사용자의 내 리뷰 조회
+	public record MyReviews(
+
+		Long productId,
+		Long reviewId,
+		LocalDateTime createdAt,
+		String content
+
+	){
+		public static MyReviews from(Review review){
+
+			return new MyReviews(
+				review.getProduct().getId(),
+				review.getId(),
+				review.getCreatedAt(),
+				review.getContent()
+			);
+
+		}
+
 	}
 
 }

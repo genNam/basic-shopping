@@ -41,6 +41,8 @@ public class OrderService {
 		//수량이 0 이상인지
 		Preconditions.validate(request.quantity() > 0, ErrorCode.INVALID_ORDER_QUANTITY);
 
+		//가격 계산
+
 		//유저 조회
 		var user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
@@ -60,6 +62,8 @@ public class OrderService {
 		//연관관계
 		product.mapToOrderProduct(orderProduct);
 		order.mapToOrder(orderProduct);
+
+		order.calculateTotalPrice();
 
 		//재고감소
 

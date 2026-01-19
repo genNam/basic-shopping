@@ -43,7 +43,7 @@ public class Order extends BaseEntity {
 		this.receiver = receiver;
 		this.orderStatus = OrderStatus.PENDING;
 		this.createdAt = LocalDateTime.now();
-		//this.totalPrice = totalPrice;
+		this.totalPrice = 0L;
 	}
 
 	public static Order create(User user, Receiver receiver){
@@ -51,7 +51,7 @@ public class Order extends BaseEntity {
 		return new Order(
 			user,
 			receiver
-			//totalPrice
+
 		);
 	}
 
@@ -59,13 +59,13 @@ public class Order extends BaseEntity {
 		this.orderProducts.add(orderProduct);
 	}
 
-	/*
+
 	public void calculateTotalPrice(){
 		this.totalPrice = orderProducts.stream()
 			.mapToLong(p -> p.getPrice() * p.getQuantity()) //각 요쇼를 int로 변환
 			.sum();
 
-	}*/
+	}
 
 	//사용자가 주문 수정(배송 정보 수정)
 	public void update(Receiver receiver){

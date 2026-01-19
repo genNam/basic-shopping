@@ -53,4 +53,13 @@ public class AdminService extends BaseEntity {
 
 		return response;
 	}
+
+	//관리자의 회원 상세 조회
+	@Transactional(readOnly = true)
+	public UserResponse.AdminUserDetail adminUserDetail(Long userId){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		return UserResponse.AdminUserDetail.from(user);
+	}
 }

@@ -2,17 +2,15 @@ package com.kt.controller.user;
 
 import java.util.List;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.common.response.ApiResult;
 import com.kt.common.support.SwaggerAssistance;
 import com.kt.dto.user.UserResponse;
-import com.kt.security.CurrentUser;
 import com.kt.service.user.AdminService;
-import com.kt.service.user.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +29,14 @@ public class AdminUserController extends SwaggerAssistance {
 	){
 		var response = adminService.adminUserSearch();
 
+		return ApiResult.ok(response);
+	}
+
+	@GetMapping("/users/{id}")
+	public ApiResult<UserResponse.AdminUserDetail> adminUserDetail(
+		@PathVariable Long id
+	){
+		var response = adminService.adminUserDetail(id);
 		return ApiResult.ok(response);
 	}
 

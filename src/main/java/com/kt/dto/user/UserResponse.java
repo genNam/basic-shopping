@@ -92,4 +92,26 @@ public class UserResponse {
 		}
 	}
 
+	//관리자의 회원 상세 조회
+	public record AdminUserDetail(
+
+		Long userId,
+		String loginId,
+		String userName,
+		String mobile,
+		String email
+
+	){
+		public static AdminUserDetail from(User user){
+			return new AdminUserDetail(
+				user.getId(),
+				user.getLoginId(),
+				user.getName(),
+				user.getMobile(),
+				user.getEmail()
+
+			);
+		}
+	}
+
 }

@@ -71,4 +71,13 @@ public class AdminService extends BaseEntity {
 		//회원정보 수정(업데이트)
 		user.update(user.getName(), user.getEmail(), user.getMobile());
 	}
+
+	//관리자가 회원 비활성화(soft delete)
+	public void adminUserInActivate(Long userId){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		user.softDelete();
+
+	}
 }

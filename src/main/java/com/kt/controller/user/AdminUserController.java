@@ -49,8 +49,15 @@ public class AdminUserController extends SwaggerAssistance {
 		return ApiResult.ok();
 	}
 
+	@PutMapping("/users/{id}/in-activate")
+	public ApiResult<Void> adminUserInActivate(
+		@PathVariable Long id
+	){
+		adminService.adminUserInActivate(id);
+		return ApiResult.ok();
+	}
 
-	//회원 비활성화 /users/{id}/in-activate
+
 	//회원 비밀번호 초기화 users/{id}/init-password
 	//회원 비밀번호 변경 {id}/change-password
 

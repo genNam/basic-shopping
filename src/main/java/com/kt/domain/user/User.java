@@ -23,6 +23,8 @@ public class User extends BaseEntity {
 	private String email;
 	private String mobile;
 
+	private LocalDateTime deletedAt;
+
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
@@ -98,6 +100,10 @@ public class User extends BaseEntity {
 
 	public void changePassword(String password){
 		this.password = password;
+	}
+
+	public void softDelete(){
+		this.deletedAt = LocalDateTime.now();
 	}
 
 

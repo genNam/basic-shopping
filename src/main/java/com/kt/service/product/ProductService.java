@@ -10,8 +10,10 @@ import com.kt.dto.product.ProductResponse;
 import com.kt.repository.product.ProductRepository;
 import com.kt.repository.review.ReviewRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+
+//트랜잭션 어노테이션
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -69,6 +71,7 @@ public class ProductService {
 	}*/
 
 	//관리자 리스트 조회
+	@Transactional(readOnly = true)
 	public List<ProductResponse.AdminList> adminList(){
 
 		List<Product> products = productRepository.findAll();
@@ -81,6 +84,7 @@ public class ProductService {
 	}
 
 	//관리자 상세 조회
+	@Transactional(readOnly = true)
 	public ProductResponse.AdminDetail adminDetail(Long id){
 
 		Product product = productRepository.findByIdOrThrow(id);
@@ -90,6 +94,7 @@ public class ProductService {
 	}
 
 	//사용자 리스트 조회
+	@Transactional(readOnly = true)
 	public List<ProductResponse.UserList> getUserList(){
 
 		var products = productRepository.findAll();
@@ -101,6 +106,7 @@ public class ProductService {
 	}
 
 	//사용자 상세 조회
+	@Transactional(readOnly = true)
 	public ProductResponse.UserDetail getUserDetail(Long id){
 
 		var product = productRepository.findByIdOrThrow(id);
@@ -112,6 +118,7 @@ public class ProductService {
 	}
 
 	//사용자 상품 리뷰 조회
+	@Transactional(readOnly = true)
 	public List<ProductResponse.ProductReview> productReviews(Long productId){
 
 		productRepository.findByIdOrThrow(productId);

@@ -18,6 +18,9 @@ import com.kt.repository.product.ProductRepository;
 import com.kt.repository.review.ReviewRepository;
 import com.kt.repository.user.UserRepository;
 
+//트랜잭션 어노테이션
+import org.springframework.transaction.annotation.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -56,6 +59,7 @@ public class ReviewService {
 	}
 
 	//사용자 상품 리뷰 조회
+	@Transactional(readOnly = true)
 	public List<ReviewResponse.UserSearch> userSearch(Long productId) {
 
 		//해당 상품의 리뷰들
@@ -100,6 +104,7 @@ public class ReviewService {
 	}
 
 	//관리자 리뷰 조회
+	@Transactional(readOnly = true)
 	public List<ReviewResponse.AdminSearch> adminSearch(Long adminId){
 
 		//리뷰 조히

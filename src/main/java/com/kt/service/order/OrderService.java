@@ -74,6 +74,7 @@ public class OrderService {
 	}
 
 	//사용자 주문 상세 조회
+	@Transactional(readOnly = true)
 	public OrderResponse.UserDetail userDetail(Long userId, Long orderId) {
 
 		//주문이 내 주문이(userId) 맞는지
@@ -84,6 +85,7 @@ public class OrderService {
 	}
 
 	//관리자 주문 상세 조회
+	@Transactional(readOnly = true)
 	public OrderResponse.AdminDetail adminDetail(Long adminId, Long orderId){
 
 		var order = orderRepository.findById(orderId)
@@ -94,6 +96,7 @@ public class OrderService {
 
 
 	//사용자 주문 리스트 조회
+	@Transactional(readOnly = true)
 	public List<OrderResponse.UserList> userList(Long userId){
 
 		//주문이 내 주문들이 맞는지 확인
@@ -107,6 +110,7 @@ public class OrderService {
 	}
 
 	//관리자 주문 리스트 조회
+	@Transactional(readOnly = true)
 	public List<OrderResponse.AdminList> adminList(Long adminId){
 
 		//모든 주문들을 가져옴

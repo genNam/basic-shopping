@@ -40,7 +40,7 @@ public class AuthController extends SwaggerAssistance {
 	@PatchMapping("/refresh")
 	public ApiResult<TokenResponse> reissue(@RequestBody @Valid TokenReissueRequest request){
 
-		TokenResponse response = authService.reissue(request.refreshToken());
+		TokenResponse response = authService.reissue(request);
 
 		return ApiResult.ok(response);
 

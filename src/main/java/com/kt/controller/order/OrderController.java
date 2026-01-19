@@ -57,7 +57,7 @@ public class OrderController {
 	}
 
 	//사용자 주문 수정
-	@PutMapping("/{id}")
+	@PatchMapping("/{id}")
 	public ApiResult<Void> userUpdate(
 		@AuthenticationPrincipal CurrentUser currentUser,
 		@RequestBody @Valid OrderRequest.UserUpdate request,

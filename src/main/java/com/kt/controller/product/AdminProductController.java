@@ -43,7 +43,7 @@ public class AdminProductController extends SwaggerAssistance {
 		return ApiResult.ok(); //성공됐음을 반환
 	}
 
-	@PutMapping("/{id}")
+	@PatchMapping("/{id}")
 	public ApiResult<Void> update(
 		@PathVariable Long id, //url에서 id 값을 가져온 다음
 		@RequestBody @Valid ProductRequest.Update request

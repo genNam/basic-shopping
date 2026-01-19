@@ -46,7 +46,7 @@ public class AdminUserController extends SwaggerAssistance {
 		return ApiResult.ok(response);
 	}
 
-	@PutMapping("/user/{id}")
+	@PatchMapping("/user/{id}")
 	public ApiResult<Void> adminUserUpdate(
 		@PathVariable Long id
 	){
@@ -54,7 +54,7 @@ public class AdminUserController extends SwaggerAssistance {
 		return ApiResult.ok();
 	}
 
-	@PutMapping("/users/{id}/in-activate")
+	@PatchMapping("/users/{id}/in-activate")
 	public ApiResult<Void> adminUserInActivate(
 		@PathVariable Long id
 	){

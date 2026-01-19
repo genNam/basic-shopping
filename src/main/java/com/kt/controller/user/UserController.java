@@ -33,7 +33,7 @@ public class UserController extends SwaggerAssistance {
 	}
 
 	//내 정보 수정
-	@PutMapping("/my-info")
+	@PatchMapping("/my-info")
 	public ApiResult<Void> update(
 		@AuthenticationPrincipal CurrentUser currentUser,
 		@RequestBody @Valid UserRequest.Update request){
@@ -44,7 +44,7 @@ public class UserController extends SwaggerAssistance {
 	}
 
 	//비밀번호 변경
-	@PutMapping("/change-password")
+	@PatchMapping("/change-password")
 	public ApiResult<Void> changePassword(
 		@RequestBody @Valid UserRequest.ChangePassword request,
 		@AuthenticationPrincipal CurrentUser currentUser){

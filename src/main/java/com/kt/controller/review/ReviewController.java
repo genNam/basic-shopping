@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,7 +52,7 @@ public class ReviewController {
 	}
 
 	//상품 리뷰 수정(사용자)
-	@PutMapping("/{id}")
+	@PatchMapping("/{id}")
 	public ApiResult<ReviewResponse.UserUpdate> userUpdate(
 		@AuthenticationPrincipal CurrentUser currentUser,
 		@RequestBody @Valid ReviewRequest.Update request,

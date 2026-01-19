@@ -4,19 +4,14 @@ import java.time.LocalDateTime;
 
 import com.kt.domain.review.Review;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
 public class ReviewResponse {
 
 	//상품에 대한 리뷰(사용자 조회)
 	public record UserSearch(
 
 		//상품
-		@NotNull
 		Long productId,
 
-		@NotBlank
 		String productName,
 
 		//작성자 이름
@@ -48,10 +43,8 @@ public class ReviewResponse {
 	public record UserUpdate(
 
 		//상품
-		@NotNull
 		Long productId,
 
-		@NotBlank
 		String productName,
 
 		//작성자 이름
@@ -83,10 +76,8 @@ public class ReviewResponse {
 	public record AdminSearch(
 
 		//상품
-		@NotNull
 		Long productId,
 
-		@NotBlank
 		String productName,
 
 		//작성자 이름

@@ -16,13 +16,9 @@ public class OrderResponse {
 	//사용자 주문 상세 조회
 	public record UserDetail(
 
-		@NotNull
 		Long totalPrice,
-		@NotNull
 		LocalDateTime createdAt,
-		@NotNull
 		OrderStatus orderStatus,
-		@NotNull
 		List<OrderProductResponse.UserProductDetail> userProductDetail
 
 	) {
@@ -44,19 +40,12 @@ public class OrderResponse {
 	//관리자 주문 상세 조회
 	public record AdminDetail(
 
-		@NotNull
 		Long totalPrice,
-		@NotNull
 		LocalDateTime createdAt,
-		@NotNull
 		OrderStatus orderStatus,
-		@NotBlank
 		String receiverName,
-		@NotBlank
 		String receiverMobile,
-		@NotBlank
 		String receiverAddress,
-		@NotNull
 		List<OrderProduct> orderProducts
 	){
 		public static AdminDetail from(Order order){
@@ -76,13 +65,9 @@ public class OrderResponse {
 	//사용자 주문 리스트 조회
 	public record UserList(
 
-		@NotNull
 		Long OrderId,
-		@NotNull
 		Long totalPrice,
-		@NotNull
 		LocalDateTime createdAt,
-		@NotBlank
 		List<OrderProductResponse.ProductNameList> productName
 
 
@@ -105,13 +90,9 @@ public class OrderResponse {
 	//관리자 주문 리스트 조회
 	public record AdminList(
 
-		@NotNull
 		Long OrderId,
-		@NotNull
 		Long totalPrice,
-		@NotNull
 		LocalDateTime createdAt,
-		@NotBlank
 		List<OrderProductResponse.ProductNameList> productName
 	){
 		public static AdminList from(Order order){

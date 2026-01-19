@@ -63,7 +63,7 @@ public class UserService {
 		var user = userRepository.findByIdOrThrow(id);
 
 		//비밀번호가 다르면 예외처리
-		Preconditions.validate(user.getPassword().equals(request.newPassword()),
+		Preconditions.validate(user.getPassword().equals(request.oldPassword()),
 			ErrorCode.DOES_NOT_MATCH_OLD_PASSWORD);
 		//지금 비밀번호랑 새로운 비밀번호랑 같으면 예외처리
 		Preconditions.validate(!request.oldPassword().equals(request.newPassword()),
@@ -113,6 +113,48 @@ public class UserService {
 			.toList();
 
 		return response;
+	}
+
+	/**
+	 * 관리자
+	 */
+	//관리자의 회원 목록 조회
+	@Transactional(readOnly = true)
+	public List<UserResponse.AdminUserSearch> adminUserSearch(){
+
+		var userList = userRepository.findAll();
+
+		var response = userList.stream()
+			.map(u -> UserResponse.AdminUserSearch.from(u))
+			.toList();
+
+		return response;
+	}
+
+	//관리자의 회원 상세 조회
+	@Transactional(readOnly = true)
+	public UserResponse.AdminUserDetail adminUserDetail(Long userId){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		return UserResponse.AdminUserDetail.from(user);
+	}
+
+	//관리자 회원 정보 수정
+	public void adminUserUpdate(Long userId){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		//회원정보 수정(업데이트)
+		user.update(user.getName(), user.getEmail(), user.getMobile());
+	}
+
+	//관리자가 회원 비활성화(soft delete)
+	public void adminUserInActivate(Long userId){
+
+		var user = userRepository.findByIdOrThrow(userId);
+
+		user.softDelete();
 	}
 
 

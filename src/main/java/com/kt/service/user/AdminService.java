@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kt.common.exception.ErrorCode;
 import com.kt.common.support.BaseEntity;
+import com.kt.common.support.Preconditions;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
 import com.kt.dto.user.UserResponse;
@@ -41,43 +43,24 @@ public class AdminService extends BaseEntity {
 		userRepository.save(newAdmin);
 	}
 
-	//관리자의 회원 목록 조회
-	@Transactional(readOnly = true)
-	public List<UserResponse.AdminUserSearch> adminUserSearch(){
 
-		var userList = userRepository.findAll();
 
-		var response = userList.stream()
-			.map(u -> UserResponse.AdminUserSearch.from(u))
-			.toList();
+	//관리자가 회원 비밀번호 초기화
+	public void adminUserInitPassword(Long userId){
 
-		return response;
+		var user = userRepository.findByIdOrThrow(userId);
 	}
 
-	//관리자의 회원 상세 조회
-	@Transactional(readOnly = true)
-	public UserResponse.AdminUserDetail adminUserDetail(Long userId){
+	//관리자가 회원 비밀번호 변경
+	public void adminUserChangePassword(Long userId, UserRequest.ChangePassword request){
 
 		var user = userRepository.findByIdOrThrow(userId);
 
-		return UserResponse.AdminUserDetail.from(user);
-	}
+		//비밀번호가 다르면 예외처리
+		Preconditions.validate(user.getPassword().equals(request.oldPassword()), ErrorCode.DOES_NOT_MATCH_OLD_PASSWORD);
+		//비밀번호가 같으면 예외처리
+		Preconditions.validate(request.oldPassword().equals(request.newPassword()), ErrorCode.CAN_NOT_ALLOWED_SAME_PASSWORD);
 
-	//관리자 회원 정보 수정
-	public void adminUserUpdate(Long userId){
-
-		var user = userRepository.findByIdOrThrow(userId);
-
-		//회원정보 수정(업데이트)
-		user.update(user.getName(), user.getEmail(), user.getMobile());
-	}
-
-	//관리자가 회원 비활성화(soft delete)
-	public void adminUserInActivate(Long userId){
-
-		var user = userRepository.findByIdOrThrow(userId);
-
-		user.softDelete();
-
+		user.changePassword(request.newPassword());
 	}
 }

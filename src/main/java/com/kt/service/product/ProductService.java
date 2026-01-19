@@ -8,6 +8,7 @@ import com.kt.domain.product.Product;
 import com.kt.dto.product.ProductRequest;
 import com.kt.dto.product.ProductResponse;
 import com.kt.repository.product.ProductRepository;
+import com.kt.repository.review.ReviewRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductService {
 
 	private final ProductRepository productRepository;
+	private final ReviewRepository reviewRepository;
 
 	public void create(ProductRequest.Create request) {
 		productRepository.save(
@@ -105,6 +107,19 @@ public class ProductService {
 
 		var status = product.canProvide();
 		ProductResponse.UserDetail response = ProductResponse.UserDetail.of(product,status);
+
+		return response;
+	}
+
+	//사용자 상품 리뷰 조회
+	public List<ProductResponse.ProductReview> productReviews(Long productId){
+
+		productRepository.findByIdOrThrow(productId);
+		var reviewList = reviewRepository.findByProductId(productId);
+
+		var response = reviewList.stream()
+			.map(r -> ProductResponse.ProductReview.from(r))
+			.toList();
 
 		return response;
 	}

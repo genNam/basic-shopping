@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.kt.domain.product.Product;
 import com.kt.domain.product.ProductStatus;
+import com.kt.domain.review.Review;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -98,7 +99,25 @@ public class ProductResponse {
 		}
 	}
 
+	//사용자 상품 리뷰 조회
+	public record ProductReview(
 
+		Long productId,
+		Long reviewId,
+		LocalDateTime createdAt,
+		String content
 
+	){
+		public static ProductReview from(Review review){
 
+			return new ProductReview(
+
+				review.getProduct().getId(),
+				review.getId(),
+				review.getCreatedAt(),
+				review.getContent()
+
+			);
+		}
+	}
 }

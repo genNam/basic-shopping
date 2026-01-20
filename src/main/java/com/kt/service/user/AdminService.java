@@ -26,22 +26,6 @@ public class AdminService extends BaseEntity {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 
-	public void create(UserRequest.Create request){
-
-		var newAdmin = User.createAdmin(
-			request.loginId(),
-			passwordEncoder.encode(request.password()), //비밀번호를 암호화하는 메서드
-			request.name(),
-			request.email(),
-			request.mobile(),
-			request.gender(),
-			request.birthday(),
-			LocalDateTime.now(),
-			LocalDateTime.now()
-		);
-
-		userRepository.save(newAdmin);
-	}
 
 
 }

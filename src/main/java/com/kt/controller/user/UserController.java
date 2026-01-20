@@ -32,6 +32,14 @@ public class UserController extends SwaggerAssistance {
 		return ApiResult.ok();
 	}
 
+	@PostMapping
+	public ApiResult<Void> createAdmin(@RequestBody @Valid UserRequest.CreateAdmin request){
+
+		userService.createAdmin(request);
+
+		return ApiResult.ok();
+	}
+
 	//내 정보 수정
 	@PatchMapping("/my-info")
 	public ApiResult<Void> update(

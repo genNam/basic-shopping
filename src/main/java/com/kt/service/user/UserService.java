@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kt.common.exception.ErrorCode;
 import com.kt.common.support.Preconditions;
+import com.kt.domain.user.Role;
 import com.kt.domain.user.User;
 import com.kt.dto.user.UserRequest;
 import com.kt.dto.user.UserResponse;
@@ -45,6 +46,24 @@ public class UserService {
 			)
 		);
 	}
+
+	public void createAdmin(UserRequest.CreateAdmin request){
+
+		var newAdmin = User.createAdmin(
+			request.loginId(),
+			passwordEncoder.encode(request.password()), //비밀번호를 암호화하는 메서드
+			request.name(),
+			request.email(),
+			request.mobile(),
+			request.gender(),
+			request.birthday(),
+			LocalDateTime.now(),
+			LocalDateTime.now()
+		);
+
+		userRepository.save(newAdmin);
+	}
+
 
 	public void update(UserRequest.Update request, Long id){
 

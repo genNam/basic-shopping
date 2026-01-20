@@ -41,6 +41,13 @@ public class AdminController extends SwaggerAssistance {
 	}
 
 	//관리자의 관리자 상세 조회
+	@GetMapping("/admins/{id}")
+	public ApiResult<UserResponse.AdminUserDetail> adminDetail(
+		@PathVariable Long id
+	){
+		var response = adminService.adminDetail(id);
+		return ApiResult.ok(response);
+	}
 	// /admins/{id}
 	//관리자의 관리자 수정
 	// /admins/{id}

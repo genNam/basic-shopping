@@ -24,4 +24,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 	//관리자 권한을 가진 user만 조회
 	List<User> findByRole(Role role);
+
+	//관리자 권한을 가진 유저 한명 조회
+	Optional<User> findByRoleAndUserId(Role role, Long userId);
 }

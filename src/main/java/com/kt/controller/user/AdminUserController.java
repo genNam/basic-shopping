@@ -2,6 +2,7 @@ package com.kt.controller.user;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Tag(name = "Admin-User")
+@PreAuthorize("hasRole('ADMIN')") //메서드 실행 직전 인가
 @RestController
 @RequestMapping("/admin/users")
 @RequiredArgsConstructor

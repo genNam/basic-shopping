@@ -70,6 +70,15 @@ public class AdminService extends BaseEntity {
 		return UserResponse.AdminUserDetail.from(admin);
 	}
 
+	//관리자 정보 수정
+	public void adminUpdate(Long adminId){
+
+		var admin = userRepository.findByRoleAndUserId(Role.ADMIN,adminId).
+			orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+
+		admin.update(admin.getName(), admin.getEmail(), admin.getMobile());
+	}
+
 
 
 }

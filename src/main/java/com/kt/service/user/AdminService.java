@@ -79,6 +79,15 @@ public class AdminService extends BaseEntity {
 		admin.update(admin.getName(), admin.getEmail(), admin.getMobile());
 	}
 
+	//관리자 비밀 번호 초기화
+	public void adminPasswordInit(Long adminId){
 
+		var admin = userRepository.findByIdOrThrow(adminId);
+
+		String initPassword = "0";
+		String encodedPassword = passwordEncoder.encode(initPassword);
+
+		admin.changePassword(encodedPassword);
+	}
 
 }

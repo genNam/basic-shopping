@@ -50,7 +50,6 @@ public class AdminController extends SwaggerAssistance {
 	}
 
 	//관리자의 관리자 수정
-	// /admins/{id}
 	@PatchMapping("/admins/{id}")
 	public ApiResult<Void> adminUpdate(
 		@PathVariable Long id
@@ -59,7 +58,12 @@ public class AdminController extends SwaggerAssistance {
 		return ApiResult.ok();
 	}
 	//관리자의 관리자 비번 초기화
-	// /admins/{id}/init-password
-
+	@PatchMapping("/admins/{id}/init-password")
+	public ApiResult<Void> adminPasswordInit(
+		@PathVariable Long id
+	){
+		adminService.adminPasswordInit(id);
+		return ApiResult.ok();
+	}
 
 }

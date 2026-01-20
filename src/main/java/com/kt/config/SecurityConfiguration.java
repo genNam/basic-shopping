@@ -29,21 +29,32 @@ public class SecurityConfiguration {
 
 	private final JwtFilter jwtFilter;
 
-	private static final String[] GET_PERMIT_ALL = {"/api/health/**", "/swagger-ui/**", "/v3/api-docs/**"};
-	private static final String[] POST_PERMIT_ALL = {"/users", "/auth/login"};
-	private static final String[] PUT_PERMIT_ALL = {"/api/v1/public/**"};
-	private static final String[] PATCH_PERMIT_ALL = {"/api/v1/public/**"};
-	private static final String[] DELETE_PERMIT_ALL = {"/api/v1/public/**"};
+	private static final String[] GET_PERMIT_ALL = {
+		"/api/health/**",
+		"/swagger-ui/**",
+		"/v3/api-docs/**"
+	};
+	private static final String[] POST_PERMIT_ALL = {
+		"/users",
+		"/auth/login",
+		"/auth/reissue"
+	};
+	private static final String[] PUT_PERMIT_ALL = {
+		"/api/v1/public/**"
+	};
+	private static final String[] PATCH_PERMIT_ALL = {
+		"/api/v1/public/**"
+	};
+	private static final String[] DELETE_PERMIT_ALL = {
+		"/api/v1/public/**"
+	};
 
-	/*
 	//역할에 따른 인가 설정
 	private static final String[] ADMIN_LIST = { "/admin/**" };
 	private static final String[] LOGIN_LIST = { "/my/**" };
 
-
 	private final String USER = "USER";
 	private final String ADMIN = "ADMIN";
-	 */
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -68,6 +79,8 @@ public class SecurityConfiguration {
 					request.requestMatchers(HttpMethod.PATCH, PATCH_PERMIT_ALL).permitAll();
 					request.requestMatchers(HttpMethod.PUT, PUT_PERMIT_ALL).permitAll();
 					request.requestMatchers(HttpMethod.DELETE, DELETE_PERMIT_ALL).permitAll();
+					request.requestMatchers(ADMIN_LIST).hasRole(ADMIN);
+					request.requestMatchers(LOGIN_LIST).hasAnyRole(USER,ADMIN); //유저 또는 어드민이면 접근 가능
 					request.anyRequest().authenticated();
 				}
 			)

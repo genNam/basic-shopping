@@ -1,5 +1,9 @@
 package com.kt.dto.product;
 
+import java.util.List;
+
+import com.kt.domain.product.Product;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -29,5 +33,15 @@ public class ProductRequest {
 		private Long price;
 		@NotNull
 		private Long quantity;
+	}
+
+	@Getter
+	@AllArgsConstructor
+	@Schema(name = "ProductRequest.AdminSoldOutProducts")
+	public static class AdminSoldOutProducts {
+
+		@NotBlank
+		List<Product> productList;
+
 	}
 }

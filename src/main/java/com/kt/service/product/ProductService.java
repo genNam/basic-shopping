@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kt.common.exception.CustomException;
+import com.kt.common.exception.ErrorCode;
 import com.kt.domain.product.Product;
 import com.kt.dto.product.ProductRequest;
 import com.kt.dto.product.ProductResponse;
@@ -62,13 +64,29 @@ public class ProductService {
 		product.activate();
 	}
 
-	/*
+	//상품 품절
 	public void soldOut(Long id){
 
 		var product = productRepository.findByIdOrThrow(id);
 
-		product.soldOut();
-	}*/
+		product.toggleSoldOut();
+	}
+
+	//상품 다중 품절
+	public void soldOutProducts(ProductRequest.AdminSoldOutProducts request){
+
+		var products = request.getProductList();
+
+		for(Product productRequest : products){
+
+			var product = productRepository.findById(productRequest.getId())
+					.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
+
+			product.toggleSoldOut();
+
+		}
+
+	}
 
 	//관리자 리스트 조회
 	@Transactional(readOnly = true)

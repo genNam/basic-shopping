@@ -73,8 +73,6 @@ public class Product extends BaseEntity {
 		return status == ProductStatus.ACTIVATED && stock > 0;
 	}
 
-
-	/*
 	public void soldOut(){
 		this.status = ProductStatus.SOLD_OUT;
 	}
@@ -98,6 +96,6 @@ public class Product extends BaseEntity {
 			throw new CustomException(ErrorCode.PRODUCT_TOGGLE_NOT_ALLOWED);
 		}
 
-	}*/
+	}
 
 }

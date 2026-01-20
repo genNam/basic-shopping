@@ -79,13 +79,24 @@ public class AdminProductController extends SwaggerAssistance {
 		return ApiResult.ok();
 	}
 
-	/*
+	//상품 품절(토글)
 	@PatchMapping("/{id}/toggle-sold-out")
 	public ApiResult<Void> toggleSoldOut(@PathVariable Long id){
+
 		productService.soldOut(id);
 
 		return ApiResult.ok();
-	}*/
+	}
+
+	//상품 다중 품절
+	@PatchMapping("/sold-out")
+	public ApiResult<Void> soldOutProducts(
+		@RequestBody @Valid ProductRequest.AdminSoldOutProducts request
+	){
+		productService.soldOutProducts(request);
+
+		return ApiResult.ok();
+	}
 
 	@GetMapping //클라이언트 요청을 처리
 	//관리자 리스트 조회
